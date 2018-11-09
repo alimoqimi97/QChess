@@ -6,14 +6,16 @@ MainWindow::MainWindow(QWidget *parent)
     this->MainWidget = new QWidget(this);
     this->MainLayout = new QGridLayout(this);
     this->Start = new QPushButton("Start",this);
-    this->GameWindow = new QMainWindow(this);
+    this->Quit = new QPushButton("Quit",this);
+    this->ChessWindow = new GameWindow();
 
-    this->GameWindow->resize(400,350);
-
+    this->ChessWindow->resize(400,350);
 
     this->connect(Start,SIGNAL(pressed()),this,SLOT(OpenGameWindow()));
+    this->connect(Quit,SIGNAL(pressed()),this,SLOT(close()));
 
     this->MainLayout->addWidget(Start);
+    this->MainLayout->addWidget(Quit);
     this->MainWidget->setLayout(MainLayout);
     this->setCentralWidget(MainWidget);
 
@@ -26,5 +28,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::OpenGameWindow()
 {
-    this->GameWindow->show();
+    this->ChessWindow->show();
 }

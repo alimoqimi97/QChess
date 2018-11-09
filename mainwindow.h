@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "gamewindow.h"
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QWidget>
@@ -14,7 +15,9 @@ private:
     QGridLayout * MainLayout;
     QWidget * MainWidget;
     QPushButton * Start;
-    QMainWindow * GameWindow;
+    QPushButton * Quit;
+    GameWindow * ChessWindow;
+
 
 public:
     MainWindow(QWidget *parent = 0);
