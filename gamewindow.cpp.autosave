@@ -63,7 +63,7 @@ void GameWindow::CreateRow(QBrush first, QBrush last, int y)
         j = (y + 300) / 75;
 
         this->Squares[i].push_back(GameScene->addRect(X,y,75,75,gpen,color));
-        //        this->Squares[X][y] = GameScene->addRect(X,y,75,75,gpen,color);
+//        this->Squares[X][y] = GameScene->addRect(X,y,75,75,gpen,color);
         this->Squares[i][j]->setFlag(QGraphicsItem ::ItemIsSelectable);
     }
 }

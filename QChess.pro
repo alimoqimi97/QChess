@@ -20,3 +20,6 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     gamewindow.h
+
+RESOURCES += \
+    BeadPics.qrc
