@@ -14,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->connect(Start,SIGNAL(pressed()),this,SLOT(OpenGameWindow()));
     this->connect(Quit,SIGNAL(pressed()),this,SLOT(close()));
 
-    this->MainLayout->addWidget(Start);
-    this->MainLayout->addWidget(Quit);
+    this->MainLayout->addWidget(Start,10,10);
+    this->MainLayout->addWidget(Quit,10,20);
     this->MainWidget->setLayout(MainLayout);
     this->setCentralWidget(MainWidget);
 

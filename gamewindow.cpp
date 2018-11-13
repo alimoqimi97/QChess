@@ -3,7 +3,7 @@
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent)
 {
-    this->Squares = new vector<vector<QGraphicsRectItem *>>();
+//    this->Squares = new vector<vector<QGraphicsRectItem *>>();
     this->GLayout = new QGridLayout(this);
     this->GWidget = new QWidget(this);
     this->GClose = new QPushButton("Close");
@@ -21,7 +21,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
 //    this->setStyleSheet("background-color:white");
 
-    this->GLayout->addWidget(GClose);
+    this->GLayout->addWidget(GClose,0,100);
     this->GWidget->setLayout(GLayout);
     this->setCentralWidget(GWidget);
 
@@ -46,7 +46,9 @@ void GameWindow::CreateRow(QBrush first, QBrush last, int y)
 {
     QBrush color;
     QPen gpen(Qt ::black);
-    int i = 0 ,j = 0;
+    QGraphicsRectItem * r;
+//    int i = 0 ,j = 0;
+//    vector<QGraphicsRectItem *> v;
 
     for(int X = -300 ; X < 300 ; X += 75)
     {
@@ -59,13 +61,15 @@ void GameWindow::CreateRow(QBrush first, QBrush last, int y)
             color = last;
         }
 
-        i = (X + 300) / 75;
-        j = (y + 300) / 75;
+        r = this->GameScene->addRect(X,y,75,75,gpen,color);
+        r->setFlags(QGraphicsItem ::ItemIsSelectable);
 
-        this->Squares[i].push_back(GameScene->addRect(X,y,75,75,gpen,color));
-        //        this->Squares[X][y] = GameScene->addRect(X,y,75,75,gpen,color);
-        this->Squares[i][j]->setFlag(QGraphicsItem ::ItemIsSelectable);
+//        i = (X + 300) / 75;
+//        j = (y + 300) / 75;
+
+//        v.push_back(GameScene->addRect(X,y,75,75,gpen,color));
+//        this->Squares[i].push_back(v);
+//        QGraphicsRectItem * r = this->Squares->at(i).at(j);
+//        r->setFlag(QGraphicsItem ::ItemIsSelectable);
     }
 }
-
-

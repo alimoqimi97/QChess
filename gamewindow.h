@@ -1,6 +1,7 @@
 #ifndef GAMEWINDOW_H
 #define GAMEWINDOW_H
 
+#include <iostream>
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QWidget>
@@ -21,7 +22,7 @@ private:
     QPushButton * GClose;
     QGraphicsView * GameView;
     QGraphicsScene * GameScene;
-    vector<vector<QGraphicsRectItem *>> *Squares;
+//    vector<vector<QGraphicsRectItem *>> *Squares;
 
 
 public:
