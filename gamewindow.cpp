@@ -4,6 +4,7 @@ GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent)
 {
 //    this->Squares = new vector<vector<QGraphicsRectItem *>>();
+    this->ChessGame = new Chess(this);
     this->GLayout = new QGridLayout(this);
     this->GWidget = new QWidget(this);
     this->GClose = new QPushButton("Close");
@@ -18,6 +19,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
 
     this->connect(this->GClose,SIGNAL(pressed()),this,SLOT(close()));
+//    this->connect(this->ChessGame,SIGNAL(KingIsChecked()),this,SLOT)
 
 //    this->setStyleSheet("background-color:white");
 
@@ -72,4 +74,82 @@ void GameWindow::CreateRow(QBrush first, QBrush last, int y)
 //        QGraphicsRectItem * r = this->Squares->at(i).at(j);
 //        r->setFlag(QGraphicsItem ::ItemIsSelectable);
     }
+}
+
+void GameWindow::FirstMoveLevel(BoardPosition *sel)
+{
+    if(!sel->IsFull() | !ChessGame->WhoseTurnIsIt(*sel))
+    {
+        return;
+    }
+
+    Movement m;
+
+    m.setCurrentPos(sel);
+
+    this->ChessGame->AddToLastMoves(m);
+
+    QList<BoardPosition> ml = this->ChessGame->nextChoices(*sel);
+    this->ChessGame->AddToNextMoves(ml);
+    this->ShowSuggestedPos(ml);
+}
+
+void GameWindow::SecondMoveLevel(BoardPosition *sel)
+{
+    Movement m = ChessGame->LastMove();
+
+    m.setNextPos(sel);
+
+    //          warning in BoardPosition :: operator==()    //
+    if(!ChessGame->NextMovesContains(sel))
+    {
+        return;
+    }
+
+    this->ChessGame->ChangeTurn();
+    ChessGame->Move(m);
+    this->MovePicture(m);
+//    this->ChessGame->ReplaceInLastMoves(m);
+    this->ChessGame->ClearNextMoves();
+}
+
+void GameWindow::MoveBead()
+{
+    QGraphicsRectItem * s = (QGraphicsRectItem * )this->GameScene->selectedItems().first();
+
+    BoardPosition s2;
+
+    //          converting to BoardPosition coordination    //
+    s2.setColumn(s->x() + 365);
+    s2.setRow(s->y() + 301);
+    //          ==========================                  //
+
+    BoardPosition * selected = this->ChessGame->FindPos(s2);
+
+    if(this->ChessGame->NextMovesIsEmpty())
+    {
+        this->FirstMoveLevel(selected);
+    }
+    else
+    {
+        this->SecondMoveLevel(selected);
+    }
+
+
+}
+
+void GameWindow::ResolveCheck()
+{
+    BoardPosition * kingPos;
+
+    if(ChessGame->getTurn() == BLACK_P)
+    {
+        kingPos = ChessGame->getChessBoard().getBlackKingPos();
+    }
+    else
+    {
+        kingPos = ChessGame->getChessBoard().getWhiteKingPos();
+    }
+
+    this->FirstMoveLevel(kingPos);
 }

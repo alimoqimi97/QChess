@@ -1,6 +1,7 @@
 #ifndef GAMEWINDOW_H
 #define GAMEWINDOW_H
 
+#include "chess.h"
 #include <iostream>
 #include <QMainWindow>
 #include <QGridLayout>
@@ -22,6 +23,7 @@ private:
     QPushButton * GClose;
     QGraphicsView * GameView;
     QGraphicsScene * GameScene;
+    Chess * ChessGame;
 //    vector<vector<QGraphicsRectItem *>> *Squares;
 
 
@@ -31,10 +33,25 @@ public:
     void CreateBoard();
     void CreateRow(QBrush first,QBrush last,int y);
 
+    void FirstMoveLevel(BoardPosition * sel);
+    void SecondMoveLevel(BoardPosition * sel);
+
+    bool MovePicture(Movement & mv)
+    {
+        //          implementation...       //
+    }
+
+    void ShowSuggestedPos(QList<BoardPosition> & sl)
+    {
+        //          implementation...      //
+    }
+
 signals:
 
 public slots:
 
+    void MoveBead();
+    void ResolveCheck();
 };
 
 #endif // GAMEWINDOW_H

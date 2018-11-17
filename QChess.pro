@@ -16,10 +16,32 @@ CONFIG  += C++11
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    gamewindow.cpp
+    gamewindow.cpp \
+    chess.cpp \
+    board.cpp \
+    bead.cpp \
+    movement.cpp \
+    boardposition.cpp \
+    pawn.cpp \
+    knight.cpp \
+    rook.cpp \
+    bishop.cpp \
+    king.cpp \
+    queen.cpp
 
 HEADERS  += mainwindow.h \
-    gamewindow.h
+    gamewindow.h \
+    chess.h \
+    board.h \
+    bead.h \
+    movement.h \
+    boardposition.h \
+    pawn.h \
+    knight.h \
+    rook.h \
+    bishop.h \
+    king.h \
+    queen.h
 
 RESOURCES += \
     BeadPics.qrc
