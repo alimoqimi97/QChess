@@ -5,12 +5,12 @@ Bead::Bead(QObject *parent) :
 {
 }
 
-Color Bead::getBeadColor() const
+Bead ::MyColor Bead::getBeadColor() const
 {
     return BeadColor;
 }
 
-void Bead::setBeadColor(const Color &value)
+void Bead::setBeadColor(const MyColor &value)
 {
     BeadColor = value;
 }

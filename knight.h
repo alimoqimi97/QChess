@@ -4,6 +4,7 @@
 #include "bead.h"
 #include <QObject>
 
+
 class Knight : public QObject,Bead
 {
     Q_OBJECT

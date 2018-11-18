@@ -2,12 +2,14 @@
 #define BOARDPOSITION_H
 
 #include "bead.h"
-#include <QObject>
+//#include <QObject>
 #include <QGraphicsRectItem>
 
-class BoardPosition : public QObject
+class Bead;
+
+class BoardPosition
 {
-    Q_OBJECT
+//    Q_OBJECT
 
 private:
     char Column;
@@ -16,19 +18,19 @@ private:
     bool Full;
 
 public:
-    explicit BoardPosition(QObject *parent = 0);
+//    explicit BoardPosition(QObject *parent = 0);
 
-    BoardPosition(const BoardPosition & other);
+//    BoardPosition(const BoardPosition &other);
 
     //          get and set methods         //
     void setColumn(char col);
-    char getColumn();
+    char getColumn() const;
 
     void setRow(int row);
-    int getRow();
+    int getRow() const;
 
-    void setBead(Bead const * b);
-    Bead * getBead() const;
+    void setBead(Bead * b);
+    Bead * getBead();
 
     void setFull(bool full);
     bool getFull();
@@ -46,14 +48,14 @@ public:
     BoardPosition DecreaseCol(int c);
 
 
-    QGraphicsRectItem toRect();
+//    QGraphicsRectItem toRect(QGraphicsRectItem &r);
 
-    BoardPosition operator=(const BoardPosition & other);
+//    BoardPosition operator=(const BoardPosition & other);
     bool operator==(const BoardPosition & other);
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 
 };
 

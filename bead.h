@@ -5,15 +5,12 @@
 #include <QObject>
 
 class BoardPosition;
+class Board;
 
-enum Color{WHITE,BLACK};
 
 class Bead : public QObject
 {
     Q_OBJECT
-
-private:
-    Color BeadColor;
 
 protected:
     int id;
@@ -21,12 +18,14 @@ protected:
 public:
     explicit Bead(QObject *parent = 0);
 
+    enum MyColor{WHITE = 1,BLACK};
+
     //          get and set methods         //
     void setId(int const i);
     int getId()const;
 
-    Color getBeadColor() const;
-    void setBeadColor(const Color &value);
+    MyColor getBeadColor() const;
+    void setBeadColor(const MyColor &value);
 
     //          ===================         //
 
@@ -39,6 +38,8 @@ signals:
 
 public slots:
 
+private:
+    MyColor BeadColor;
 };
 
 #endif // BEAD_H

@@ -11,6 +11,7 @@ public:
     explicit Bishop(QObject *parent = 0);
     Bishop();
 
+    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos, Board &cboard);
 
 signals:
 

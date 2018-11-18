@@ -11,6 +11,8 @@ public:
     explicit Rook(QObject *parent = 0);
     Rook();
 
+    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos, Board &cboard);
+
 signals:
 
 public slots:

@@ -1,52 +1,52 @@
 #include "movement.h"
 
-Movement::Movement(QObject *parent) :
-    QObject(parent)
-{
-}
+//Movement::Movement(QObject *parent) :
+//    QObject(parent)
+//{
+//}
 
-Movement::Movement(const Movement &other)
-{
-    this->bead = other.getbead();
-    this->CurrentPos = other.getCurrentPos();
-    this->NextPos = other.getNextPos();
-}
+//Movement::Movement(const Movement &other)
+//{
+//    this->bead = other.getbead();
+//    this->CurrentPos = other.getCurrentPos();
+//    this->NextPos = other.getNextPos();
+//}
 
-void Movement::setbead(const int b)
+void Movement::setbead(int b)
 {
     this->bead = b;
 }
 
-int Movement::getbead() const
+int Movement::getbead()
 {
     return this->bead;
 }
 
-void Movement::setCurrentPos(const BoardPosition *current)
+void Movement::setCurrentPos( BoardPosition *current)
 {
     this->CurrentPos = current;
 }
 
-BoardPosition *Movement::getCurrentPos() const
+BoardPosition *Movement::getCurrentPos()
 {
     return this->CurrentPos;
 }
 
-void Movement::setNextPos(const BoardPosition *next)
+void Movement::setNextPos(BoardPosition *next)
 {
     this->NextPos = next;
 }
 
-BoardPosition *Movement::getNextPos() const
+BoardPosition *Movement::getNextPos()
 {
     return this->NextPos;
 }
 
-Movement Movement::operator=(const Movement &other)
-{
-    this->bead = other.getbead();
-    this->CurrentPos = other.getCurrentPos();
-    this->NextPos = other.getNextPos();
+//Movement Movement::operator=(const Movement &other)
+//{
+//    this->bead = other.getbead();
+//    this->CurrentPos = other.getCurrentPos();
+//    this->NextPos = other.getNextPos();
 
-    return *this;
-}
+//    return *this;
+//}

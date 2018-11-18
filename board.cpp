@@ -18,7 +18,7 @@ bool Board::PositionIsEmpty(BoardPosition &selectedpos)
     return !(FindPos(selectedpos)->IsFull());
 }
 
-bool Board::PositionMatches(BoardPosition &pos, Color bc)
+bool Board::PositionMatches(BoardPosition &pos, Bead::MyColor bc)
 {
     return (this->FindPos(pos)->getBead()->getBeadColor() == bc);
 }

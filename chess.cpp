@@ -99,15 +99,15 @@ void Chess::ChangeTurn()
 
 bool Chess::WhoseTurnIsIt(BoardPosition &selectedpos)
 {
-    Color c;
+    Bead ::MyColor c;
 
     if(this->turn == BLACK_P)
     {
-        c = BLACK;
+        c = Bead ::BLACK;
     }
     else
     {
-        c = WHITE;
+        c = Bead ::WHITE;
     }
 
     return this->ChessBoard.PositionMatches(selectedpos,c);

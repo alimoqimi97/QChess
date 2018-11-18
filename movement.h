@@ -2,11 +2,11 @@
 #define MOVEMENT_H
 
 #include "boardposition.h"
-#include <QObject>
+//#include <QObject>
 
-class Movement : public QObject
+class Movement
 {
-    Q_OBJECT
+//    Q_OBJECT
 
 private:
     int bead;
@@ -14,30 +14,30 @@ private:
     BoardPosition * NextPos;
 
 public:
-    explicit Movement(QObject *parent = 0);
+//    explicit Movement(QObject *parent = 0);
 
-    Movement(const Movement & other);
+//    Movement(const Movement & other);
 
     //          get and set methods     //
-    void setbead(const int b);
-    int getbead()const;
+    void setbead(int b);
+    int getbead();
 
-    void setCurrentPos(BoardPosition const * current);
-    BoardPosition *getCurrentPos() const;
+    void setCurrentPos(BoardPosition *current);
+    BoardPosition *getCurrentPos();
 
-    void setNextPos(BoardPosition const * next);
-    BoardPosition * getNextPos() const;
+    void setNextPos(BoardPosition * next);
+    BoardPosition * getNextPos();
 
     //          ==================      //
 
 
     //          public functions        //
 
-    Movement operator=(const Movement & other);
+//    Movement operator=(const Movement & other);
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 
 };
 

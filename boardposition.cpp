@@ -1,17 +1,17 @@
 #include "boardposition.h"
 
-BoardPosition::BoardPosition(QObject *parent) :
-    QObject(parent)
-{
-}
+//BoardPosition::BoardPosition(QObject *parent) :
+//    QObject(parent)
+//{
+//}
 
-BoardPosition::BoardPosition(const BoardPosition &other)
-{
-    this->Column = other.getColumn();
-    this->Row = other.getRow();
-    this->B = other.getBead();
-    this->Full = other.getFull();
-}
+//BoardPosition::BoardPosition(const BoardPosition &other)
+//{
+//    this->Column = other.getColumn();
+//    this->Row = other.getRow();
+//    this->B = other.getBead();
+//    this->Full = other.getFull();
+//}
 
 
 
@@ -20,7 +20,7 @@ void BoardPosition::setColumn(char col)
     this->Column = col;
 }
 
-char BoardPosition::getColumn()
+char BoardPosition::getColumn() const
 {
     return this->Column;
 }
@@ -30,17 +30,17 @@ void BoardPosition::setRow(int row)
     this->Row = row;
 }
 
-int BoardPosition::getRow()
+int BoardPosition::getRow() const
 {
     return this->Row;
 }
 
-void BoardPosition::setBead(const Bead *b)
+void BoardPosition::setBead(Bead *b)
 {
     this->B = b;
 }
 
-Bead *BoardPosition::getBead() const
+Bead *BoardPosition::getBead()
 {
     return this->B;
 }
@@ -124,22 +124,22 @@ BoardPosition BoardPosition::DecreaseCol(int c)
     return b;
 }
 
-QGraphicsRectItem BoardPosition::toRect()
-{
-    return QGraphicsRectItem(this->Column - 365,this->Row - 301,75,75);
-}
+//QGraphicsRectItem BoardPosition::toRect(QGraphicsRectItem & r)
+//{
+//    QGraphicsRectItem r(this->Column - 365,this->Row - 301,75,75);
+//}
 
-BoardPosition BoardPosition::operator=(const BoardPosition &other)
-{
-    this->Column = other.getColumn();
-    this->Row = other.getRow();
-    this->B = other.getBead();
-    this->Full = other.getFull();
+//BoardPosition BoardPosition::operator=(const BoardPosition &other)
+//{
+//    this->Column = other.getColumn();
+//    this->Row = other.getRow();
+//    this->B = other.getBead();
+//    this->Full = other.getFull();
 
-    return *this;
-}
+//    return *this;
+//}
 
-bool BoardPosition::operator==(BoardPosition &other)
+bool BoardPosition::operator==(const BoardPosition &other)
 {
     if(this->Row == other.getRow() && this->Column == other.getColumn())
     {

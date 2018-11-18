@@ -5,6 +5,8 @@
 #include "boardposition.h"
 #include <QObject>
 
+class Bead;
+
 class Board : public QObject
 {
     Q_OBJECT
@@ -23,7 +25,7 @@ public:
     Board(const Board & other);
 
     bool PositionIsEmpty(BoardPosition & selectedpos);
-    bool PositionMatches(BoardPosition & pos,Color bc);
+    bool PositionMatches(BoardPosition & pos, Bead ::MyColor bc);
 
     void Transfer(BoardPosition * F,BoardPosition * L);
 
