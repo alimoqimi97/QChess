@@ -10,7 +10,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
-#include <vector>
+#include <QVector>
 using namespace std;
 
 class GameWindow : public QMainWindow
@@ -24,6 +24,8 @@ private:
     QGraphicsView * GameView;
     QGraphicsScene * GameScene;
     Chess * ChessGame;
+    QVector<QVector<QGraphicsRectItem *>> * Squares;
+
 //    vector<vector<QGraphicsRectItem *>> *Squares;
 
 

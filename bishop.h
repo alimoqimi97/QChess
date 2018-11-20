@@ -2,20 +2,21 @@
 #define BISHOP_H
 
 #include "bead.h"
-#include <QObject>
+#include "board.h"
+//#include <QObject>
 
-class Bishop : public QObject,Bead
+class Bishop : public Bead
 {
-    Q_OBJECT
+//    Q_OBJECT
 public:
-    explicit Bishop(QObject *parent = 0);
+//    explicit Bishop(QObject *parent = 0);
     Bishop();
 
-    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos, Board &cboard);
+    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 
 };
 

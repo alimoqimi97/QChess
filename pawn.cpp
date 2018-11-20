@@ -1,23 +1,29 @@
 #include "pawn.h"
 
-Pawn::Pawn(QObject *parent) :
-    QObject(parent)
-{
-}
+//Pawn::Pawn(QObject *parent) :
+//    QObject(parent)
+//{
+//}
 
-Pawn::Pawn()
+Pawn::Pawn() : Bead()
 {
     this->id = 3;
 }
 
-bool Pawn::ControlBead(Board &cboard, BoardPosition &bp)
+Pawn::Pawn(int c)
 {
-    BoardPosition * f = cboard.FindPos(bp);
-    return (!f->IsFull()) | (f->IsFull() & f->getBead()->getBeadColor()
-                             != bp.getBead()->getBeadColor());
+    this->id = 3;
+    this->setBeadColor(c);
 }
 
-QList<BoardPosition> Pawn::NextChoices(BoardPosition &CurPos, Board &cboard)
+//bool Pawn::ControlBead(Board &cboard, BoardPosition &bp)
+//{
+//    BoardPosition * f = cboard.FindPos(bp);
+//    return (!f->IsFull()) | ((f->IsFull() & f->getBead()->getBeadColor())
+//                             != (bp.getBead()->getBeadColor()));
+//}
+
+QList<BoardPosition> Pawn::NextChoices(BoardPosition &CurPos)
 {
     //          CurPos is finded from board...          //
 
@@ -35,15 +41,15 @@ QList<BoardPosition> Pawn::NextChoices(BoardPosition &CurPos, Board &cboard)
         c = CurPos.DecreaseRow(1).DecreaseCol(1);
     }
 
-    if(this->ControlBead(cboard,b))
-    {
+//    if(this->ControlBead(cboard,b))
+//    {
         np.push_back(b);
-    }
+//    }
 
-    if(this->ControlBead(cboard,c))
-    {
+//    if(this->ControlBead(cboard,c))
+//    {
         np.push_back(c);
-    }
+//    }
 
     return np;
 }

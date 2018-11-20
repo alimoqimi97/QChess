@@ -1,9 +1,9 @@
 #include "queen.h"
 
-Queen::Queen(QObject *parent) :
-    QObject(parent)
-{
-}
+//Queen::Queen(QObject *parent) :
+//    QObject(parent)
+//{
+//}
 
 Queen::Queen()
 {

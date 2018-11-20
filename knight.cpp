@@ -1,23 +1,23 @@
 #include "knight.h"
 
-Knight::Knight(QObject *parent) :
-    QObject(parent)
-{
-}
+//Knight::Knight(QObject *parent) :
+//    QObject(parent)
+//{
+//}
 
-Knight::Knight()
+Knight::Knight() : Bead()
 {
     this->id = 6;
 }
 
-bool Knight::ControlBead(Board &b, BoardPosition bp)
-{
-    //          the curpos color (bp color) is remained in it...        //
-    BoardPosition * f = b.FindPos(bp);
+//bool Knight::ControlBead(Board &b, BoardPosition bp)
+//{
+//    //          the curpos color (bp color) is remained in it...        //
+//    BoardPosition * f = b.FindPos(bp);
 
-    return (!f->IsFull()) | (f->IsFull() & f->getBead()->getBeadColor()
-                             != bp.getBead()->getBeadColor());
-}
+//    return (!f->IsFull()) | (f->IsFull() & f->getBead()->getBeadColor()
+//                             != bp.getBead()->getBeadColor());
+//}
 
 BoardPosition Knight::MakePos(int row, int col, BoardPosition cp)
 {
@@ -34,17 +34,17 @@ BoardPosition Knight::MakePos(int row, int col, BoardPosition cp)
     return cp;
 }
 
-void Knight::InsertInList(int r, int col, QList<BoardPosition> &n, BoardPosition &c, Board &B)
+void Knight::InsertInList(int r, int col, QList<BoardPosition> &n, BoardPosition &c)
 {
     BoardPosition t = this->MakePos(r,col,c);
 
-    if(t.InRange() & this->ControlBead(B,t))
+    if(t.InRange())
     {
         n.push_back(t);
     }
 }
 
-QList<BoardPosition> Knight::NextChoices(BoardPosition &CurPos, Board &cboard)
+QList<BoardPosition> Knight::NextChoices(BoardPosition &CurPos)
 {
     QList<BoardPosition> np;
     int num[16] = {1,2,1,-2,-1,2,-1,-2,2,1,2,-1,-2,1,-2,-1};
@@ -52,7 +52,7 @@ QList<BoardPosition> Knight::NextChoices(BoardPosition &CurPos, Board &cboard)
 
     for(int i = 0 ; i < 15 ; i += 2)
     {
-        this->InsertInList(num[i],num[i + 1],np,CurPos,cboard);
+        this->InsertInList(num[i],num[i + 1],np,CurPos);
     }
 
     return np;

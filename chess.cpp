@@ -117,7 +117,7 @@ QList<BoardPosition> Chess::nextChoices(BoardPosition &currpos)
 {
     BoardPosition * f = this->FindPos(currpos);
 
-    return f->getBead()->NextChoices(*f,this->ChessBoard);
+    return this->FilterChoices(f->getBead()->NextChoices(*f));
 }
 
 void Chess::Move(Movement &m)
@@ -181,6 +181,33 @@ Movement &Chess::LastMove()
     {
         return this->WhitePlayerLastMoves.back();
     }
+}
+
+void Chess::CleanExtraPos(QList<BoardPosition> &n, bool isfull, BoardPosition B)
+{
+    if(!isfull)
+    {
+        return;
+    }
+
+    while(B.InRange())
+    {
+        n.removeOne(B);
+        B = B.IncreaseCol(1).IncreaseRow(1);
+    }
+}
+
+QList<BoardPosition> &Chess::FilterChoices(QList<BoardPosition> np)
+{
+    BoardPosition * p;
+
+    for(BoardPosition b : np)
+    {
+        p = this->ChessBoard.FindPos(b);
+        this->CleanExtraPos(np,p->IsFull(),b);
+    }
+
+    return np;
 }
 
 Board Chess::getChessBoard() const

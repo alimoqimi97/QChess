@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->Quit = new QPushButton("Quit",this);
     this->ChessWindow = new GameWindow();
 
-    this->ChessWindow->resize(400,350);
+//    this->ChessWindow->resize(600,450);
 
     this->connect(Start,SIGNAL(pressed()),this,SLOT(OpenGameWindow()));
     this->connect(Quit,SIGNAL(pressed()),this,SLOT(close()));
@@ -28,5 +28,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::OpenGameWindow()
 {
-    this->ChessWindow->show();
+    this->ChessWindow->showMaximized();
+//    this->ChessWindow->show();
 }

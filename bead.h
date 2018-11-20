@@ -1,22 +1,24 @@
 #ifndef BEAD_H
 #define BEAD_H
 
-#include "board.h"
-#include <QObject>
+//#include "board.h"
+//#include <QObject>
+//#include "boardposition.h"
+#include <QList>
 
 class BoardPosition;
 class Board;
 
 
-class Bead : public QObject
+class Bead
 {
-    Q_OBJECT
+//    Q_OBJECT
 
 protected:
     int id;
 
 public:
-    explicit Bead(QObject *parent = 0);
+//    explicit Bead(QObject *parent = 0);
 
     enum MyColor{WHITE = 1,BLACK};
 
@@ -25,19 +27,16 @@ public:
     int getId()const;
 
     MyColor getBeadColor() const;
-    void setBeadColor(const MyColor &value);
+    void setBeadColor(const int &value);
 
     //          ===================         //
 
-    virtual QList<BoardPosition> NextChoices(BoardPosition & CurPos,Board & cboard) = 0;
+    virtual QList<BoardPosition> NextChoices(BoardPosition & CurPos);
+
     virtual bool Check(BoardPosition const & kingpos,
-                       BoardPosition const & curpos) = 0;
-
-
-signals:
-
-public slots:
-
+                       BoardPosition const & curpos) ;
+//signals:
+//public slots:
 private:
     MyColor BeadColor;
 };

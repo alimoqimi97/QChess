@@ -2,18 +2,28 @@
 #define KING_H
 
 #include "bead.h"
-#include <QObject>
+#include "boardposition.h"
+//#include <QObject>
 
-class King : public QObject,Bead
+class King : public Bead
 {
-    Q_OBJECT
+//    Q_OBJECT
 public:
-    explicit King(QObject *parent = 0);
+//    explicit King(QObject *parent = 0);
     King();
 
-signals:
+//    bool isInCheckDanger(BoardPosition & target)
+//    {
+////        return (this->RightDiagonal(b) | ...
+//    }
 
-public slots:
+//    void FilterChoices(QList<BoardPosition> & n);
+    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
+
+
+//signals:
+
+//public slots:
 
 };
 

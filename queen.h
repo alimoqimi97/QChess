@@ -3,19 +3,19 @@
 
 
 #include "bead.h"
-#include <QObject>
+//#include <QObject>
 
-class Queen : public QObject,Bead
+class Queen : public Bead
 {
-    Q_OBJECT
+//    Q_OBJECT
 public:
-    explicit Queen(QObject *parent = 0);
+//    explicit Queen(QObject *parent = 0);
     Queen();
 
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 
 };
 

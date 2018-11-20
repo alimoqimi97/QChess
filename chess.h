@@ -66,6 +66,9 @@ public:
 
     Movement &LastMove();
 
+    void CleanExtraPos(QList<BoardPosition> & n,bool isfull,BoardPosition B);
+
+    QList<BoardPosition> & FilterChoices(QList<BoardPosition> np);
 
 signals:
 

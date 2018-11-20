@@ -1,40 +1,40 @@
 #include "rook.h"
 
-Rook::Rook(QObject *parent) :
-    QObject(parent)
-{
-}
+//Rook::Rook(QObject *parent) :
+//    QObject(parent)
+//{
+//}
 
 Rook::Rook()
 {
     this->id = 5;
 }
 
-QList<BoardPosition> Rook::NextChoices(BoardPosition &CurPos, Board &cboard)
+QList<BoardPosition> Rook::NextChoices(BoardPosition &CurPos)
 {
     QList<BoardPosition> np;
-    bool control , AEmpty = true,BEmpty = true;
+    bool AEmpty = true,BEmpty = true;
     BoardPosition b(CurPos),a(CurPos);
 
     for(int r = 1; r < 9 ; r++)
     {
         a = a.IncreaseCol(1);
 
-        if(a.InRange() & AEmpty)
+        if(a.InRange() )
         {
             np.push_back(a);
         }
 
-        AEmpty = !cboard.FindPos(a)->IsFull();
+//        AEmpty = !cboard.FindPos(a)->IsFull();
 
         b = b.DecreaseCol(1);
 
-        if(b.InRange() & BEmpty)
+        if(b.InRange())
         {
             np.push_back(b);
         }
 
-        BEmpty = !cboard.FindPos(b)->IsFull();
+//        BEmpty = !cboard.FindPos(b)->IsFull();
     }
 
     AEmpty = true;
@@ -45,22 +45,20 @@ QList<BoardPosition> Rook::NextChoices(BoardPosition &CurPos, Board &cboard)
         a = a.IncreaseRow(1);
         b = b.DecreaseRow(1);
 
-        if(a.InRange() & AEmpty)
+        if(a.InRange())
         {
             np.push_back(a);
         }
 
-        AEmpty = !cboard.FindPos(a)->IsFull();
+//        AEmpty = !cboard.FindPos(a)->IsFull();
 
-        if(b.InRange() & BEmpty)
+        if(b.InRange())
         {
             np.push_back(b);
         }
 
-        BEmpty = !cboard.FindPos(b)->IsFull();
+//        BEmpty = !cboard.FindPos(b)->IsFull();
     }
 
     return np;
-
-
 }

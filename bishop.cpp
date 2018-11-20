@@ -1,16 +1,16 @@
 #include "bishop.h"
 
-Bishop::Bishop(QObject *parent) :
-    QObject(parent)
-{
-}
+//Bishop::Bishop(QObject *parent) :
+//    QObject(parent)
+//{
+//}
 
 Bishop::Bishop()
 {
     this->id = 4;
 }
 
-QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos, Board &cboard)
+QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos)
 {
     QList<BoardPosition> np;
     BoardPosition a,b,scale(CurPos);
@@ -22,23 +22,23 @@ QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos, Board &cboard)
         a = scale.IncreaseRow(i);
         b = scale.DecreaseRow(i);
 
-        control = a.InRange() & AEmpty;
+        control = a.InRange();
 
         if(control)
         {
             np.push_back(a);
         }
 
-        AEmpty = !cboard.FindPos(a)->IsFull();
+//        AEmpty = !cboard.FindPos(a)->IsFull();
 
-        control = b.InRange() & BEmpty;
+        control = b.InRange() ;
 
         if(control)
         {
             np.push_back(b);
         }
 
-        BEmpty = !cboard.FindPos(b)->IsFull();
+//        BEmpty = !cboard.FindPos(b)->IsFull();
     }
 
     return np;

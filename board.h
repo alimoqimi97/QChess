@@ -3,9 +3,10 @@
 
 #include "movement.h"
 #include "boardposition.h"
+#include "pawn.h"
 #include <QObject>
 
-class Bead;
+//class Pawn;
 
 class Board : public QObject
 {
@@ -25,12 +26,20 @@ public:
     Board(const Board & other);
 
     bool PositionIsEmpty(BoardPosition & selectedpos);
-    bool PositionMatches(BoardPosition & pos, Bead ::MyColor bc);
+    bool PositionMatches(BoardPosition & pos, int bc);
 
     void Transfer(BoardPosition * F,BoardPosition * L);
 
     bool MakeChessPieces()
     {
+//        Pawn * b = new Pawn();
+
+        for(int i = 0 ; i < 9 ; i++)
+        {
+            this->CBoard[1][i].setBead(new Pawn(2));
+            this->CBoard[1][i].setBead(new Pawn(1));
+        }
+
 
     }
 

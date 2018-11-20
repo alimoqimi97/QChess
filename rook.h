@@ -2,20 +2,21 @@
 #define ROOK_H
 
 #include "bead.h"
-#include <QObject>
+#include "board.h"
+//#include <QObject>
 
-class Rook : public QObject,Bead
+class Rook : public Bead
 {
-    Q_OBJECT
+//    Q_OBJECT
 public:
-    explicit Rook(QObject *parent = 0);
+//    explicit Rook(QObject *parent = 0);
     Rook();
 
-    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos, Board &cboard);
+    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 
 };
 

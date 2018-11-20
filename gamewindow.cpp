@@ -4,6 +4,7 @@ GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent)
 {
 //    this->Squares = new vector<vector<QGraphicsRectItem *>>();
+    this->Squares = new QVector<QVector<QGraphicsRectItem *>>();
     this->ChessGame = new Chess(this);
     this->GLayout = new QGridLayout(this);
     this->GWidget = new QWidget(this);
@@ -49,8 +50,8 @@ void GameWindow::CreateRow(QBrush first, QBrush last, int y)
     QBrush color;
     QPen gpen(Qt ::black);
     QGraphicsRectItem * r;
-//    int i = 0 ,j = 0;
-//    vector<QGraphicsRectItem *> v;
+    QVector<QGraphicsRectItem *> v1;
+    int i = 0 ,j = 0;
 
     for(int X = -300 ; X < 300 ; X += 75)
     {
@@ -66,14 +67,18 @@ void GameWindow::CreateRow(QBrush first, QBrush last, int y)
         r = this->GameScene->addRect(X,y,75,75,gpen,color);
         r->setFlags(QGraphicsItem ::ItemIsSelectable);
 
-//        i = (X + 300) / 75;
-//        j = (y + 300) / 75;
+        v1.push_back(r);
+
+        i = (X + 300) / 75;
 
 //        v.push_back(GameScene->addRect(X,y,75,75,gpen,color));
 //        this->Squares[i].push_back(v);
 //        QGraphicsRectItem * r = this->Squares->at(i).at(j);
 //        r->setFlag(QGraphicsItem ::ItemIsSelectable);
     }
+
+    j = (y + 300) / 75;
+    this->Squares->push_back(v1);
 }
 
 void GameWindow::FirstMoveLevel(BoardPosition *sel)
