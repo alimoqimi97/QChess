@@ -10,6 +10,12 @@ Rook::Rook()
     this->id = 5;
 }
 
+Rook::Rook(int c)
+{
+    this->id = 5;
+    this->setBeadColor(c);
+}
+
 QList<BoardPosition> Rook::NextChoices(BoardPosition &CurPos)
 {
     QList<BoardPosition> np;
@@ -61,4 +67,10 @@ QList<BoardPosition> Rook::NextChoices(BoardPosition &CurPos)
     }
 
     return np;
+}
+
+bool Rook::Check(BoardPosition &kingpos, BoardPosition &curpos)
+{
+    return (curpos.getColumn() == kingpos.getColumn())
+            | (curpos.getRow() == kingpos.getRow());
 }

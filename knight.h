@@ -2,9 +2,12 @@
 #define KNIGHT_H
 
 #include "bead.h"
-#include "board.h"
+#include "boardposition.h"
+
+//#include "board.h"
 //#include <QObject>
 
+class Board;
 
 class Knight : public Bead
 {
@@ -12,6 +15,7 @@ class Knight : public Bead
 public:
 //    explicit Knight(QObject *parent = 0);
     Knight();
+    Knight(int c);
 
 
 //    bool ControlBead(Board & b,BoardPosition bp);
@@ -21,6 +25,7 @@ public:
     void  InsertInList(int r, int col, QList<BoardPosition> & n, BoardPosition &c);
 
     virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
+    virtual bool Check( BoardPosition &kingpos, BoardPosition &curpos);
 
 //signals:
 

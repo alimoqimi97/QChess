@@ -10,5 +10,9 @@ int main(int argc, char *argv[])
     w.setWindowTitle("Start page");
     w.show();
 
+    //          debugging movebead()...            //
+//    w.ChessWindow->GameScene->selectionChanged();
+    //          ============            //
+
     return a.exec();
 }

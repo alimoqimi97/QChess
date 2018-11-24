@@ -53,3 +53,21 @@ QList<BoardPosition> Pawn::NextChoices(BoardPosition &CurPos)
 
     return np;
 }
+
+bool Pawn::Check(BoardPosition &kingpos, BoardPosition &curpos)
+{
+    BoardPosition a,b;
+
+    if(this->getBeadColor() == BLACK)
+    {
+        a = a.IncreaseRow(1).IncreaseCol(1);
+        b = b.IncreaseRow(1).DecreaseCol(1);
+    }
+    else
+    {
+        a = a.DecreaseRow(1).IncreaseCol(1);
+        b = b.DecreaseRow(1).DecreaseCol(1);
+    }
+
+    return (a == kingpos) | (b == kingpos);
+}

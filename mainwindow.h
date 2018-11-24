@@ -23,6 +23,22 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    //       get and set methods        //
+    void setMainLayout(QGridLayout * mn);
+    QGridLayout * getMainLayout();
+
+    void setmainWidget(QWidget * mw);
+    QWidget * getMwidget();
+
+    void setChessWindow(GameWindow * cw);
+    GameWindow * getChessWindow();
+
+    void setStart(QPushButton * st);
+    QPushButton * getStart();
+
+    void setQuit(QPushButton * qu);
+    QPushButton *getQuit();
+
 signals:
 
 

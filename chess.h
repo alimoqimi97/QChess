@@ -74,6 +74,7 @@ signals:
 
     void GameOver();
     void KingIsChecked();
+    void TurnChanged();
 
 public slots:
 

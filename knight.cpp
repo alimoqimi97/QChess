@@ -10,6 +10,12 @@ Knight::Knight() : Bead()
     this->id = 6;
 }
 
+Knight::Knight(int c)
+{
+    this->id = 6;
+    this->setBeadColor(c);
+}
+
 //bool Knight::ControlBead(Board &b, BoardPosition bp)
 //{
 //    //          the curpos color (bp color) is remained in it...        //
@@ -56,4 +62,17 @@ QList<BoardPosition> Knight::NextChoices(BoardPosition &CurPos)
     }
 
     return np;
+}
+
+bool Knight::Check(BoardPosition &kingpos, BoardPosition &curpos)
+{
+    int num[16] = {1,2,1,-2,-1,2,-1,-2,2,1,2,-1,-2,1,-2,-1};
+    bool control = true;
+
+    for(int i = 0 ; i < 17 && control;i++)
+    {
+        control = (this->MakePos(num[i],num[i + 1],curpos) != kingpos);
+    }
+
+    return control;
 }

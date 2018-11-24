@@ -47,6 +47,9 @@ public:
     BoardPosition IncreaseCol(int c);
     BoardPosition DecreaseCol(int c);
 
+    bool operator!=(BoardPosition & other);
+
+    BoardPosition operator+(QPair<int,int> & p);
 
 //    QGraphicsRectItem toRect(QGraphicsRectItem &r);
 

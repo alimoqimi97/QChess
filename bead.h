@@ -33,8 +33,8 @@ public:
 
     virtual QList<BoardPosition> NextChoices(BoardPosition & CurPos);
 
-    virtual bool Check(BoardPosition const & kingpos,
-                       BoardPosition const & curpos) ;
+    virtual bool Check(BoardPosition & kingpos,
+                       BoardPosition & curpos) ;
 //signals:
 //public slots:
 private:

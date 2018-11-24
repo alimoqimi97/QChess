@@ -22,10 +22,7 @@ public:
     bool ControlBead(Board & cboard,BoardPosition & bp);
 
     virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
-    virtual bool Check(const BoardPosition &kingpos, const BoardPosition &curpos)
-    {
-
-    }
+    virtual bool Check( BoardPosition &kingpos, BoardPosition &curpos);
     //signals:
     //public slots:
 };

@@ -11,6 +11,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QVector>
+#include <QHBoxLayout>
+#include <QFont>
+#include <QLabel>
 using namespace std;
 
 class GameWindow : public QMainWindow
@@ -19,6 +22,11 @@ class GameWindow : public QMainWindow
 
 private:
     QGridLayout * GLayout;
+//    QGridLayout * Gviewlayout;
+    QHBoxLayout * TurnLayout;
+//    QHBoxLayout * CloseLayout;
+    QLabel * TurnLabel;
+    QFont * TurnFont;
     QWidget * GWidget;
     QPushButton * GClose;
     QGraphicsView * GameView;
@@ -38,14 +46,22 @@ public:
     void FirstMoveLevel(BoardPosition * sel);
     void SecondMoveLevel(BoardPosition * sel);
 
-    bool MovePicture(Movement & mv)
-    {
-        //          implementation...       //
-    }
+    void MovePicture(Movement & mv);
 
-    void ShowSuggestedPos(QList<BoardPosition> & sl)
+    void ShowSuggestedPos(QList<BoardPosition> & sl);
+
+    void InsertBeadPictures()
     {
-        //          implementation...      //
+        QImage pawnpic(":/BeadPics/blackpawn.jpg");
+
+        pawnpic = pawnpic.scaled(98,93,Qt::KeepAspectRatio,Qt::FastTransformation);
+
+        QBrush b(pawnpic);
+
+        for(int i = 0 ; i < 8 ; i++)
+        {
+            Squares->at(1).at(i)->setBrush(b);
+        }
     }
 
 signals:
@@ -54,6 +70,7 @@ public slots:
 
     void MoveBead();
     void ResolveCheck();
+    void ModifyTurn();
 };
 
 #endif // GAMEWINDOW_H

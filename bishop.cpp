@@ -10,6 +10,29 @@ Bishop::Bishop()
     this->id = 4;
 }
 
+Bishop::Bishop(int c)
+{
+    this->id = 4;
+    this->setBeadColor(c);
+}
+
+bool Bishop::ExaminePath(int row, int col, BoardPosition kp, BoardPosition cp)
+{
+    QPair<int,int> p;
+    bool control = true;
+
+    p.first = row;
+    p.second = col;
+
+    while(cp.InRange() & control)
+    {
+        cp = cp + p;
+        control = (cp != kp);
+    }
+
+    return !control;
+}
+
 QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos)
 {
     QList<BoardPosition> np;
@@ -44,4 +67,10 @@ QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos)
     return np;
 
 
+}
+
+bool Bishop::Check(BoardPosition &kingpos, BoardPosition &curpos)
+{
+    return (this->ExaminePath(1,1,kingpos,curpos) | ExaminePath(1,-1,kingpos,curpos)
+            | ExaminePath(-1,1,kingpos,curpos) | ExaminePath(-1,-1,kingpos,curpos));
 }

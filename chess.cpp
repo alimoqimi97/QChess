@@ -95,6 +95,8 @@ void Chess::ChangeTurn()
     {
         this->turn = BLACK_P;
     }
+
+    this->TurnChanged();
 }
 
 bool Chess::WhoseTurnIsIt(BoardPosition &selectedpos)

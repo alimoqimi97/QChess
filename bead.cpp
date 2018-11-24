@@ -20,7 +20,7 @@ QList<BoardPosition> Bead::NextChoices(BoardPosition &CurPos)
 
 }
 
-bool Bead::Check(const BoardPosition &kingpos, const BoardPosition &curpos)
+bool Bead::Check(BoardPosition &kingpos, BoardPosition &curpos)
 {
 
 }

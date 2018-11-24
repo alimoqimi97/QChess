@@ -4,6 +4,11 @@
 #include "movement.h"
 #include "boardposition.h"
 #include "pawn.h"
+#include "rook.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
+#include "knight.h"
 #include <QObject>
 
 //class Pawn;
@@ -30,18 +35,14 @@ public:
 
     void Transfer(BoardPosition * F,BoardPosition * L);
 
-    bool MakeChessPieces()
-    {
-//        Pawn * b = new Pawn();
+    void CreatePawns();
+    void CreateRooks();
+    void CreateKnights();
+    void CreateBishops();
+    void CreateKings();
+    void CreateQueens();
 
-        for(int i = 0 ; i < 9 ; i++)
-        {
-            this->CBoard[1][i].setBead(new Pawn(2));
-            this->CBoard[1][i].setBead(new Pawn(1));
-        }
-
-
-    }
+    bool MakeChessPieces();
 
     BoardPosition * FindPos(BoardPosition & target);
 

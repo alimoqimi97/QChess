@@ -3,8 +3,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    this->MainWidget = new QWidget(this);
-    this->MainLayout = new QGridLayout(this);
+    this->MainWidget = new QWidget();
+    this->MainLayout = new QGridLayout();
     this->Start = new QPushButton("Start",this);
     this->Quit = new QPushButton("Quit",this);
     this->ChessWindow = new GameWindow();
@@ -26,8 +26,58 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::setMainLayout(QGridLayout *mn)
+{
+    this->MainLayout = mn;
+}
+
+QGridLayout *MainWindow::getMainLayout()
+{
+    return this->MainLayout;
+}
+
+void MainWindow::setmainWidget(QWidget *mw)
+{
+    this->MainWidget = mw;
+}
+
+QWidget *MainWindow::getMwidget()
+{
+    return this->MainWidget;
+}
+
+void MainWindow::setChessWindow(GameWindow *cw)
+{
+    this->ChessWindow = cw;
+}
+
+GameWindow *MainWindow::getChessWindow()
+{
+    return this->ChessWindow;
+}
+
+void MainWindow::setStart(QPushButton *st)
+{
+    this->Start = st;
+}
+
+QPushButton *MainWindow::getStart()
+{
+    return this->Start;
+}
+
+void MainWindow::setQuit(QPushButton *qu)
+{
+    this->Quit = qu;
+}
+
+QPushButton *MainWindow::getQuit()
+{
+    return this->Quit;
+}
+
 void MainWindow::OpenGameWindow()
 {
     this->ChessWindow->showMaximized();
-//    this->ChessWindow->show();
+    //    this->ChessWindow->show();
 }

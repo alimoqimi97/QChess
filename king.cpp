@@ -10,6 +10,12 @@ King::King()
     this->id = 1;
 }
 
+King::King(int c)
+{
+    this->id = 1;
+    this->setBeadColor(c);
+}
+
 //void King::FilterChoices(QList<BoardPosition> &n)
 //{
 //    for(BoardPosition b : n)

@@ -124,6 +124,19 @@ BoardPosition BoardPosition::DecreaseCol(int c)
     return b;
 }
 
+bool BoardPosition::operator!=(BoardPosition &other)
+{
+    return !(*this == other);
+}
+
+BoardPosition BoardPosition::operator+(QPair<int, int> &p)
+{
+    BoardPosition bResult;
+
+    bResult.setRow(this->Row + p.first);
+    bResult.setColumn(this->Column + p.second);
+}
+
 //QGraphicsRectItem BoardPosition::toRect(QGraphicsRectItem & r)
 //{
 //    QGraphicsRectItem r(this->Column - 365,this->Row - 301,75,75);
