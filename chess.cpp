@@ -65,7 +65,7 @@ void Chess::setNextMoves(const QList<BoardPosition> &value)
     NextMoves = value;
 }
 
-BoardPosition *Chess::FindPos(BoardPosition &f)
+BoardPosition *Chess::FindPosition(BoardPosition &f)
 {
     return this->ChessBoard.FindPos(f);
 }
@@ -117,7 +117,7 @@ bool Chess::WhoseTurnIsIt(BoardPosition &selectedpos)
 
 QList<BoardPosition> Chess::nextChoices(BoardPosition &currpos)
 {
-    BoardPosition * f = this->FindPos(currpos);
+    BoardPosition * f = this->FindPosition(currpos);
 
     return this->FilterChoices(f->getBead()->NextChoices(*f));
 }
@@ -199,7 +199,7 @@ void Chess::CleanExtraPos(QList<BoardPosition> &n, bool isfull, BoardPosition B)
     }
 }
 
-QList<BoardPosition> &Chess::FilterChoices(QList<BoardPosition> np)
+QList<BoardPosition> Chess::FilterChoices(QList<BoardPosition> np)
 {
     BoardPosition * p;
 

@@ -20,10 +20,7 @@ public:
     Queen();
     Queen(int c);
 
-    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos)
-    {
-
-    }
+    virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
     virtual bool Check(BoardPosition &kingpos,BoardPosition &curpos);
 
 //signals:

@@ -32,24 +32,16 @@ QList<BoardPosition> Pawn::NextChoices(BoardPosition &CurPos)
 
     if(CurPos.getBead()->getBeadColor() == BLACK)
     {
-        b = CurPos.IncreaseRow(1).IncreaseCol(1);
-        c = CurPos.IncreaseRow(1).DecreaseCol(1);
+        b = CurPos.IncreaseRow(1);
+        c = CurPos.IncreaseRow(2);
     }
     else
     {
-        b = CurPos.DecreaseRow(1).IncreaseCol(1);
-        c = CurPos.DecreaseRow(1).DecreaseCol(1);
+        b = CurPos.DecreaseRow(1);
+        c = CurPos.DecreaseRow(2);
     }
-
-//    if(this->ControlBead(cboard,b))
-//    {
         np.push_back(b);
-//    }
-
-//    if(this->ControlBead(cboard,c))
-//    {
         np.push_back(c);
-//    }
 
     return np;
 }

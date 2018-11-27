@@ -15,6 +15,11 @@
 
 
 
+BoardPosition::BoardPosition():Column('A'),Row(1),B(nullptr),Full(false)
+{
+
+}
+
 void BoardPosition::setColumn(char col)
 {
     this->Column = col;

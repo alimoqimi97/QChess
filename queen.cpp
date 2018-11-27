@@ -16,6 +16,14 @@ Queen::Queen(int c)
     this->setBeadColor(c);
 }
 
+QList<BoardPosition> Queen::NextChoices(BoardPosition &CurPos)
+{
+    Rook r;
+    Bishop b;
+
+    return r.NextChoices(CurPos) + b.NextChoices(CurPos);
+}
+
 bool Queen::Check(BoardPosition &kingpos, BoardPosition &curpos)
 {
     Rook r;

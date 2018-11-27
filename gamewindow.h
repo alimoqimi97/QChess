@@ -22,9 +22,7 @@ class GameWindow : public QMainWindow
 
 private:
     QGridLayout * GLayout;
-//    QGridLayout * Gviewlayout;
     QHBoxLayout * TurnLayout;
-//    QHBoxLayout * CloseLayout;
     QLabel * TurnLabel;
     QFont * TurnFont;
     QWidget * GWidget;
@@ -33,9 +31,6 @@ private:
     QGraphicsScene * GameScene;
     Chess * ChessGame;
     QVector<QVector<QGraphicsRectItem *>> * Squares;
-
-//    vector<vector<QGraphicsRectItem *>> *Squares;
-
 
 public:
     explicit GameWindow(QWidget *parent = 0);
@@ -56,11 +51,23 @@ public:
 
         pawnpic = pawnpic.scaled(98,93,Qt::KeepAspectRatio,Qt::FastTransformation);
 
+
+        //Black pawns pictures...       //
         QBrush b(pawnpic);
 
         for(int i = 0 ; i < 8 ; i++)
         {
             Squares->at(1).at(i)->setBrush(b);
+        }
+
+        //white pawns pictures...       //
+
+        pawnpic.save(":/BeadPics/whitequeen.jpg");
+
+        pawnpic = pawnpic.scaled(90,90,Qt::KeepAspectRatio,Qt::FastTransformation);
+        for(int i = 0 ; i < 8 ; i++)
+        {
+            this->Squares->at(6).at(i)->setBrush(QBrush(pawnpic));
         }
     }
 

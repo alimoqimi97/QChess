@@ -158,21 +158,25 @@ void GameWindow::MovePicture(Movement &mv)
 
 void GameWindow::ShowSuggestedPos(QList<BoardPosition> &sl)
 {
-    int i = 0 , j = 0;
+//    int i = 0 , j = 0;
 
     for(BoardPosition b : sl)
     {
+        int i = 0 , j = 0;
+
         i = b.getColumn() - 65;
         j = b.getRow() - 1;
 
-        Squares->at(i).at(j)->setBrush(QBrush(Qt::red));
+        if(b.InRange())
+        {
+            Squares->at(i).at(j)->setBrush(QBrush(Qt::red));
+        }
     }
 }
 
 void GameWindow::MoveBead()
 {
     QGraphicsRectItem * s = (QGraphicsRectItem * )this->GameScene->selectedItems().first();
-
     BoardPosition s2;
 
     //          converting to BoardPosition coordination    //
@@ -180,7 +184,12 @@ void GameWindow::MoveBead()
     s2.setRow(s->y() + 301);
     //          ==========================                  //
 
-    BoardPosition * selected = this->ChessGame->FindPos(s2);
+    //          debugging           //
+//    s2.setColumn('A');
+//    s2.setRow(7);
+    //          =========           //
+
+    BoardPosition * selected = this->ChessGame->FindPosition(s2);
 
     if(!selected->IsFull())
     {

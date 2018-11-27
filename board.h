@@ -30,6 +30,8 @@ public:
 
     Board(const Board & other);
 
+    void InitializeBoard();
+
     bool PositionIsEmpty(BoardPosition & selectedpos);
     bool PositionMatches(BoardPosition & pos, int bc);
 

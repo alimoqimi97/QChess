@@ -18,6 +18,8 @@ private:
     bool Full;
 
 public:
+    BoardPosition();
+
 //    explicit BoardPosition(QObject *parent = 0);
 
 //    BoardPosition(const BoardPosition &other);

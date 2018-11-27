@@ -22,10 +22,10 @@ public:
 
 //    void FilterChoices(QList<BoardPosition> & n);
     virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
-    virtual bool Check( BoardPosition &kingpos, BoardPosition &curpos)
-    {
+//    virtual bool Check( BoardPosition &kingpos, BoardPosition &curpos)
+//    {
 
-    }
+//    }
 
 //signals:
 

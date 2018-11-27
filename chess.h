@@ -47,7 +47,7 @@ public:
     void setTurn(const Turn &value);
     //          =================          //
 
-    BoardPosition * FindPos(BoardPosition & f);
+    BoardPosition * FindPosition(BoardPosition & f);
     bool NextMovesIsEmpty();
     bool NextMovesContains(BoardPosition * b);
     void ClearNextMoves();
@@ -68,7 +68,7 @@ public:
 
     void CleanExtraPos(QList<BoardPosition> & n,bool isfull,BoardPosition B);
 
-    QList<BoardPosition> & FilterChoices(QList<BoardPosition> np);
+    QList<BoardPosition> FilterChoices(QList<BoardPosition> np);
 
 signals:
 

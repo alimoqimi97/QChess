@@ -3,6 +3,8 @@
 Board::Board(QObject *parent) :
     QObject(parent)
 {
+    this->InitializeBoard();
+    this->MakeChessPieces();
 }
 
 Board::Board(const Board &other) :QObject(this)
@@ -11,6 +13,19 @@ Board::Board(const Board &other) :QObject(this)
 //    this->CBoard = other.CBoard;
     this->BlackKingPos = other.getBlackKingPos();
     this->WhiteKingPos = other.getWhiteKingPos();
+}
+
+void Board::InitializeBoard()
+{
+    for(int i = 0 ; i < 8 ; i++)
+    {
+        for(int j = 0 ; j < 8 ; j++)
+        {
+            this->CBoard[i][j].setRow(i + 1);
+            this->CBoard[i][j].setColumn(j + 65);
+        }
+    }
+
 }
 
 bool Board::PositionIsEmpty(BoardPosition &selectedpos)
@@ -40,44 +55,73 @@ void Board::CreatePawns()
     for(int i = 0 ; i < 9 ; i++)
     {
         this->CBoard[1][i].setBead(new Pawn(2));
+        this->CBoard[1][i].setFull(true);
         this->CBoard[6][i].setBead(new Pawn(1));
+        this->CBoard[6][i].setFull(true);
     }
 }
 
 void Board::CreateRooks()
 {
     CBoard[0][0].setBead(new Rook(2));
+    CBoard[0][0].setFull(true);
+
     CBoard[0][7].setBead(new Rook(1));
+    CBoard[0][7].setFull(true);
+
     CBoard[7][0].setBead(new Rook(1));
+    CBoard[7][0].setFull(true);
+
     CBoard[7][7].setBead(new Rook(2));
+    CBoard[7][7].setFull(true);
 }
 
 void Board::CreateKnights()
 {
     this->CBoard[0][1].setBead(new Knight(2));
+    this->CBoard[0][1].setFull(true);
+
     this->CBoard[0][6].setBead(new Knight(2));
+    this->CBoard[0][6].setFull(true);
+
     this->CBoard[7][1].setBead(new Knight(1));
+    this->CBoard[7][1].setFull(true);
+
     this->CBoard[7][6].setBead(new Knight(1));
+    this->CBoard[7][6].setFull(true);
 }
 
 void Board::CreateBishops()
 {
     this->CBoard[0][2].setBead(new Bishop(2));
+    this->CBoard[0][2].setFull(true);
+
     this->CBoard[0][5].setBead(new Bishop(2));
+    this->CBoard[0][5].setFull(true);
+
     this->CBoard[7][2].setBead(new Bishop(1));
+    this->CBoard[7][2].setFull(true);
+
     this->CBoard[7][5].setBead(new Bishop(1));
+    this->CBoard[7][5].setFull(true);
 }
 
 void Board::CreateKings()
 {
     this->CBoard[0][3].setBead(new King(2));
+    this->CBoard[0][3].setFull(true);
+
     this->CBoard[7][3].setBead(new King(1));
+    this->CBoard[7][3].setFull(true);
 }
 
 void Board::CreateQueens()
 {
     this->CBoard[0][4].setBead(new Queen(2));
+    this->CBoard[0][4].setFull(true);
+
     this->CBoard[7][4].setBead(new Queen(1));
+    this->CBoard[7][4].setFull(true);
 }
 
 bool Board::MakeChessPieces()
