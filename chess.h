@@ -23,7 +23,9 @@ private:
 public:
     explicit Chess(QObject *parent = 0);
 
+
     //          get and set methods         //
+
 
     Board getChessBoard() const;
     void setChessBoard(const Board &value);
@@ -46,6 +48,8 @@ public:
     Turn getTurn() const;
     void setTurn(const Turn &value);
     //          =================          //
+
+    //          public functions...           //
 
     BoardPosition * FindPosition(BoardPosition & f);
     bool NextMovesIsEmpty();

@@ -1,7 +1,7 @@
 #include "chess.h"
 
 Chess::Chess(QObject *parent) :
-    QObject(parent)
+    QObject(parent) , turn(WHITE_P),winner(WHITEPLAYER)
 {
 }
 
@@ -159,7 +159,7 @@ void Chess::AddToLastMoves(Movement &m)
     {
         this->WhitePlayerLastMoves.push_back(m);
     }
-    else
+    else if(this->turn == BLACK_P)
     {
         this->BlackPlayerLastMoves.push_back(m);
     }
@@ -192,6 +192,8 @@ void Chess::CleanExtraPos(QList<BoardPosition> &n, bool isfull, BoardPosition B)
         return;
     }
 
+
+    //          uncomplete ... it must write for other kind of beads    //
     while(B.InRange())
     {
         n.removeOne(B);

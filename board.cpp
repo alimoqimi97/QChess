@@ -1,7 +1,7 @@
 #include "board.h"
 
 Board::Board(QObject *parent) :
-    QObject(parent)
+    QObject(parent),BlackKingPos(nullptr),WhiteKingPos(nullptr)
 {
     this->InitializeBoard();
     this->MakeChessPieces();
@@ -113,6 +113,9 @@ void Board::CreateKings()
 
     this->CBoard[7][3].setBead(new King(1));
     this->CBoard[7][3].setFull(true);
+
+    this->BlackKingPos = *(CBoard + 0) + 3;
+    this->WhiteKingPos = *(CBoard + 7) + 3;
 }
 
 void Board::CreateQueens()
@@ -124,7 +127,7 @@ void Board::CreateQueens()
     this->CBoard[7][4].setFull(true);
 }
 
-bool Board::MakeChessPieces()
+void Board::MakeChessPieces()
 {
     //Pawn...
     this->CreatePawns();

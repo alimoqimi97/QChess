@@ -16,6 +16,9 @@
 #include <QLabel>
 using namespace std;
 
+
+typedef QVector<QVector<QGraphicsRectItem * >> VOV;
+
 class GameWindow : public QMainWindow
 {
     Q_OBJECT
@@ -35,6 +38,11 @@ private:
 public:
     explicit GameWindow(QWidget *parent = 0);
 
+    //          get and set methods         //
+    void setSquares(VOV * sq);
+    VOV * getSquares();
+
+
     void CreateBoard();
     void CreateRow(QBrush first,QBrush last,int y);
 
@@ -44,32 +52,13 @@ public:
     void MovePicture(Movement & mv);
 
     void ShowSuggestedPos(QList<BoardPosition> & sl);
+    void RestoreSuggestedPos(QList<BoardPosition> sl);
 
-    void InsertBeadPictures()
-    {
-        QImage pawnpic(":/BeadPics/blackpawn.jpg");
+    void RestoreCurrentPosBrush(Movement & m);
 
-        pawnpic = pawnpic.scaled(98,93,Qt::KeepAspectRatio,Qt::FastTransformation);
+    void InsertBeadPictures();
 
 
-        //Black pawns pictures...       //
-        QBrush b(pawnpic);
-
-        for(int i = 0 ; i < 8 ; i++)
-        {
-            Squares->at(1).at(i)->setBrush(b);
-        }
-
-        //white pawns pictures...       //
-
-        pawnpic.save(":/BeadPics/whitequeen.jpg");
-
-        pawnpic = pawnpic.scaled(90,90,Qt::KeepAspectRatio,Qt::FastTransformation);
-        for(int i = 0 ; i < 8 ; i++)
-        {
-            this->Squares->at(6).at(i)->setBrush(QBrush(pawnpic));
-        }
-    }
 
 signals:
 

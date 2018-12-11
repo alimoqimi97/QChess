@@ -14,6 +14,8 @@ private:
     BoardPosition * NextPos;
 
 public:
+    Movement();
+
 //    explicit Movement(QObject *parent = 0);
 
 //    Movement(const Movement & other);

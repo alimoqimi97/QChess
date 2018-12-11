@@ -67,7 +67,7 @@ bool BoardPosition::IsFull()
 
 bool BoardPosition::InRange()
 {
-    if(this->Row > 0 & this->Row < 9 & this->Column >= 'A'&this->Column <= 'H')
+    if((this->Row > 0) & (this->Row < 9) & (this->Column >= 'A') & (this->Column <= 'H'))
     {
         return true;
     }

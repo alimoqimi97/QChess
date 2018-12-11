@@ -12,6 +12,11 @@
 //    this->NextPos = other.getNextPos();
 //}
 
+Movement::Movement() : bead(0) , CurrentPos(nullptr),NextPos(nullptr)
+{
+
+}
+
 void Movement::setbead(int b)
 {
     this->bead = b;

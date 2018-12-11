@@ -37,7 +37,8 @@ QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos)
 {
     QList<BoardPosition> np;
     BoardPosition a,b,scale(CurPos);
-    bool control,AEmpty = true,BEmpty = true;
+    bool control;
+//    bool  AEmpty = true,BEmpty = true;
 
     for(int i = 1 ; i < 9 ; i++)
     {

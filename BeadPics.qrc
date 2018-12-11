@@ -1,16 +1,17 @@
 <RCC>
     <qresource prefix="/BeadPics">
         <file>whitequeen.jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (2).jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (3).jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (4).jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (5).jpg</file>
+        <file>whiteking.jpg</file>
+        <file>whiteknight.jpg</file>
+        <file>whitebishop.jpg</file>
+        <file>whiterook.jpg</file>
         <file>whitepawn.jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (7).jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (8).jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (9).jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (10).jpg</file>
-        <file>C:/Users/shider/Pictures/Saved Pictures/p4.jpg (11).jpg</file>
+        <file>blackking.jpg</file>
+        <file>blackqueen.jpg</file>
+        <file>blackknight.jpg</file>
+        <file>blackbishop.jpg</file>
+        <file>blackrook.jpg</file>
         <file>blackpawn.jpg</file>
+        <file>CI3.jpg</file>
     </qresource>
 </RCC>

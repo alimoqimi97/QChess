@@ -3,15 +3,12 @@
 
 #include "bead.h"
 #include "boardposition.h"
-//#include <QObject>
 
 class Board;
 
 class King : public Bead
 {
-//    Q_OBJECT
 public:
-//    explicit King(QObject *parent = 0);
     King();
     King(int c);
 
@@ -26,10 +23,6 @@ public:
 //    {
 
 //    }
-
-//signals:
-
-//public slots:
 
 };
 

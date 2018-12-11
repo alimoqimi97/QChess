@@ -44,7 +44,7 @@ public:
     void CreateKings();
     void CreateQueens();
 
-    bool MakeChessPieces();
+    void MakeChessPieces();
 
     BoardPosition * FindPos(BoardPosition & target);
 

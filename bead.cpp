@@ -1,9 +1,9 @@
 #include "bead.h"
 
-//Bead::Bead(QObject *parent) :
-//    QObject(parent)
-//{
-//}
+Bead::Bead():BeadColor(WHITE)
+{
+
+}
 
 Bead ::MyColor Bead::getBeadColor() const
 {
@@ -16,14 +16,11 @@ void Bead::setBeadColor(const int &value)
 }
 
 QList<BoardPosition> Bead::NextChoices(BoardPosition &CurPos)
-{
-
-}
+{}
 
 bool Bead::Check(BoardPosition &kingpos, BoardPosition &curpos)
-{
+{}
 
-}
 
 void Bead::setId(const int i)
 {

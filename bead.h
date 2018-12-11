@@ -12,15 +12,14 @@ class Board;
 
 class Bead
 {
-//    Q_OBJECT
 
 protected:
     int id;
 
 public:
-//    explicit Bead(QObject *parent = 0);
-
     enum MyColor{WHITE = 1,BLACK};
+
+    Bead();
 
     //          get and set methods         //
     void setId(int const i);
@@ -35,8 +34,11 @@ public:
 
     virtual bool Check(BoardPosition & kingpos,
                        BoardPosition & curpos) ;
-//signals:
-//public slots:
+    virtual ~Bead()
+    {
+
+    }
+
 private:
     MyColor BeadColor;
 };

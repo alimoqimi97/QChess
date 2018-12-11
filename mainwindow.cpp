@@ -9,6 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
     this->Quit = new QPushButton("Quit",this);
     this->ChessWindow = new GameWindow();
 
+
+    Start->setStyleSheet("color: white;background-color: green;font-family: arial;");
+    Quit->setStyleSheet("color: white;background-color: red;font-family: Bold arial;");
 //    this->ChessWindow->resize(600,450);
 
     this->connect(Start,SIGNAL(pressed()),this,SLOT(OpenGameWindow()));
@@ -18,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->MainLayout->addWidget(Quit,10,20);
     this->MainWidget->setLayout(MainLayout);
     this->setCentralWidget(MainWidget);
-
 }
 
 MainWindow::~MainWindow()
