@@ -133,7 +133,6 @@ void Chess::Move(Movement &m)
     if(l->getBead()->getId() == 1)
     {
         //            int trn = 1;
-
         this->ChessBoard.setKingPos(l,turn);
         return;
     }
@@ -147,6 +146,7 @@ void Chess::Move(Movement &m)
         kingPos = *(ChessBoard.getWhiteKingPos());
     }
 
+    //              king :: check() ==> king :: isInCheckDanger()
     if(l->getBead()->Check(kingPos,*l) & kingPos.getBead()->Check(kingPos,*l))
     {
         this->KingIsChecked();

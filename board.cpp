@@ -46,6 +46,7 @@ void Board::Transfer(BoardPosition *F, BoardPosition *L)
     }
 
     L->setBead(F->getBead());
+    L->setFull(true);
     F->setBead(nullptr);
     F->setFull(false);
 }

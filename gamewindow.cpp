@@ -342,17 +342,15 @@ void GameWindow::InsertBeadPictures()
 
 void GameWindow::MoveBead()
 {
-    QGraphicsRectItem * s = (QGraphicsRectItem * )this->GameScene->selectedItems().first();
+//    QGraphicsRectItem * s = (QGraphicsRectItem * )this->GameScene->selectedItems().first();
     BoardPosition s2;
 
     //The nagative y border in GraphicsScene starts from top !...//
 
 
-
-
     //      testing             //
 //    QGraphicsRectItem * s = new QGraphicsRectItem(-225,150,75,75);
-//    QGraphicsRectItem * s = new QGraphicsRectItem(-225,-225,75,75);
+    QGraphicsRectItem * s = new QGraphicsRectItem(-225,225,75,75);
     //      =======             //
 
     //          converting to BoardPosition coordination    //
@@ -361,16 +359,31 @@ void GameWindow::MoveBead()
     //          ==========================                  //
 
 
-    //          debugging mode      //
-//    BoardPosition * se = this->ChessGame->FindPosition(s2);
-//    this->FirstMoveLevel(se);
-//    BoardPosition b;
-//    b.setRow(5);
-//    b.setColumn('B');
-//    BoardPosition * selected = this->ChessGame->FindPosition(b);
+    //          debugging      //
+    BoardPosition * se = this->ChessGame->FindPosition(s2);
+    this->FirstMoveLevel(se);
+    BoardPosition b;
+    b.setRow(6);
+    b.setColumn('C');
+    BoardPosition * selected = this->ChessGame->FindPosition(b);
+    this->SecondMoveLevel(selected);
+
+    BoardPosition deb;
+    deb.setRow(2);
+    deb.setColumn('B');
+
+    this->FirstMoveLevel(ChessGame->FindPosition(deb));
+    BoardPosition d2;
+    d2.setRow(4);
+    d2.setColumn('B');
+    this->SecondMoveLevel(ChessGame->FindPosition(d2));
+
+    this->FirstMoveLevel(ChessGame->FindPosition(b));
+    this->SecondMoveLevel(ChessGame->FindPosition(deb));
+
     //          =============       //
 
-    BoardPosition * selected = this->ChessGame->FindPosition(s2);
+//    BoardPosition * selected = this->ChessGame->FindPosition(s2);
 
     if(!selected->IsFull() && ChessGame->NextMovesIsEmpty())
     {
@@ -409,9 +422,11 @@ void GameWindow::ModifyTurn()
     if(ChessGame->getTurn() == BLACK_P)
     {
         this->TurnLabel->setText("Turn : Black");
+        this->TurnLabel->setStyleSheet("color: red;background-color: white;");
     }
     else
     {
         this->TurnLabel->setText("Turn : White");
+        this->TurnLabel->setStyleSheet("color: red;background-color: white;");
     }
 }

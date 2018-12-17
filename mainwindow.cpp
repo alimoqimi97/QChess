@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->ChessWindow = new GameWindow();
 
 
+//    this->ChessWindow->setStyleSheet("background-color: white;");
     Start->setStyleSheet("color: white;background-color: green;font-family: arial;");
     Quit->setStyleSheet("color: white;background-color: red;font-family: Bold arial;");
 //    this->ChessWindow->resize(600,450);
