@@ -140,6 +140,8 @@ BoardPosition BoardPosition::operator+(QPair<int, int> &p)
 
     bResult.setRow(this->Row + p.first);
     bResult.setColumn(this->Column + p.second);
+
+    return bResult;
 }
 
 //QGraphicsRectItem BoardPosition::toRect(QGraphicsRectItem & r)

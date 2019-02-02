@@ -10,20 +10,24 @@ GameWindow::GameWindow(QWidget *parent) :
     this->TurnLayout = new QHBoxLayout();
     this->TurnLabel = new QLabel("Turn : White");
     this->GWidget = new QWidget();
-    this->GClose = new QPushButton("Close",this);
+    this->GClose = new QPushButton("Close");
     this->GameScene = new QGraphicsScene();
     this->GameView = new QGraphicsView(GameScene);
 
+    this->GameView->setStyleSheet("background-color: white;border-radius: 20px;");
+
+    this->GClose->setStyleSheet("font-family: MV Boli;color: black;font-size: 14px;background-color: lightgray;font-weight: 500;border-width: 3px;border-style: dashed;border-radius: 8px;border-color: gray;padding: 2px;");
+    this->TurnLabel->setStyleSheet("color: blue;background-color: white;font-family: MV Boli;border-radius: 10px;border-width: 3px;border-color: red;font-size: 32px;border-style: solid;");
     this->GLayout->addLayout(TurnLayout,0,0);
     this->GLayout->addWidget(GameView);
     this->GLayout->addWidget(GClose);
 
-    this->GClose->setStyleSheet("background:gray");
+//    this->GClose->setStyleSheet("background: gray");
 
     this->TurnLabel->setFont(*TurnFont);
     this->TurnLayout->addWidget(TurnLabel,100,Qt::AlignCenter);
 
-    TurnLabel->setStyleSheet("background-color:white");
+//    TurnLabel->setStyleSheet("background-color:white");
     this->CreateBoard();
     this->InsertBeadPictures();
 
@@ -109,17 +113,32 @@ void GameWindow::FirstMoveLevel(BoardPosition *sel)
     ml = this->ChessGame->nextChoices(*sel);
 
     //      ml must be edited...
-    //      this->ChessGame->EditChoices(ml);
+//    this->ChessGame->EditChoices(ml,sel->getBead()->getId());
+
+    // if there isn't any choices for choosed bead by player; he must choose another//
+    //          under testing part      //
+//    if(ml.isEmpty())
+//    {
+//        return;
+//    }
+    //          ------------------      //
 
     this->ChessGame->AddToNextMoves(ml);
-    this->ShowSuggestedPos(ml);
+//    this->ShowSuggestedPos(ml);
+    this->ShowSuggestedPos(ml,Qt::blue);
 //    return ml;
 }
 
 void GameWindow::SecondMoveLevel(BoardPosition *sel)
 {
+    BoardPosition kp;
 
-    this->RestoreSuggestedPos(ChessGame->getNextMoves());
+    //   if selected pos is in suggested poses restore color of poses.  //
+    if(this->ChessGame->getNextMoves().contains(*sel))
+    {
+        this->RestoreSuggestedPos(ChessGame->getNextMoves());
+    }
+//    this->RestoreSuggestedPos(ChessGame->getNextMoves());
 
     Movement m = ChessGame->LastMove();
 
@@ -131,8 +150,13 @@ void GameWindow::SecondMoveLevel(BoardPosition *sel)
         return;
     }
 
+    //      changing turn..     //
     this->ChessGame->ChangeTurn();
-    ChessGame->Move(m);
+
+    //      Move bead in the core(internl) chess     //
+    ChessGame->setIsChecked(ChessGame->Move(m));
+
+    //      Move picture of bead in ui(GraphicView)     //
     this->MovePicture(m);
 
     //          retreiving first position of bead brush       //
@@ -140,6 +164,29 @@ void GameWindow::SecondMoveLevel(BoardPosition *sel)
     //          =====================           //
 
     this->ChessGame->ClearNextMoves();
+
+    //   survey if a king is checked.     //
+
+    if(this->ChessGame->getTurn() == BLACK_P)
+    {
+        kp = *(this->ChessGame->ChessBoard.getBlackKingPos());
+    }
+    else if(this->ChessGame->getTurn() == WHITE_P)
+    {
+        kp = *(this->ChessGame->ChessBoard.getWhiteKingPos());
+    }
+
+    if(this->ChessGame->getIsChecked())
+    {
+//         1)giving a warning for check;2)suggesting next choices of checked king;3)set the color of suggested poses blue.4)resolve check(not in here).
+
+        this->TurnLabel->setText("Check!");
+        this->ChessGame->MakeCheckDir(kp,*sel);
+        this->ShowSuggestedPos(this->ChessGame->getCheckDir(),Qt::red);
+
+    }
+
+
 }
 
 void GameWindow::MovePicture(Movement &mv)
@@ -171,7 +218,7 @@ void GameWindow::MovePicture(Movement &mv)
 
 }
 
-void GameWindow::ShowSuggestedPos(QList<BoardPosition> &sl)
+void GameWindow::ShowSuggestedPos(QList<BoardPosition> &sl,Qt::GlobalColor c)
 {
 //    int i = 0 , j = 0;
 
@@ -184,7 +231,9 @@ void GameWindow::ShowSuggestedPos(QList<BoardPosition> &sl)
 
         if(b.InRange())
         {
-            Squares->at(i).at(j)->setBrush(QBrush(Qt::red));
+//            Squares->at(i).at(j)->setBrush(QBrush(Qt::red));
+            //      under testing part      //
+            this->Squares->at(i).at(j)->setBrush(QBrush(c));
         }
     }
 }
@@ -340,17 +389,31 @@ void GameWindow::InsertBeadPictures()
 
 }
 
+GameWindow::~GameWindow()
+{
+    delete GLayout;
+    delete TurnLayout;
+    delete TurnLabel;
+    delete TurnFont;
+    delete GWidget;
+    delete GClose;
+    delete GameScene;
+    delete GameView;
+    delete ChessGame;
+    delete Squares;
+}
+
 void GameWindow::MoveBead()
 {
-//    QGraphicsRectItem * s = (QGraphicsRectItem * )this->GameScene->selectedItems().first();
+    QGraphicsRectItem * s = (QGraphicsRectItem * )this->GameScene->selectedItems().first();
     BoardPosition s2;
 
     //The nagative y border in GraphicsScene starts from top !...//
 
 
     //      testing             //
-//    QGraphicsRectItem * s = new QGraphicsRectItem(-225,150,75,75);
-    QGraphicsRectItem * s = new QGraphicsRectItem(-225,225,75,75);
+    //    QGraphicsRectItem * s = new QGraphicsRectItem(-225,150,75,75);
+//    QGraphicsRectItem * s = new QGraphicsRectItem(-225,225,75,75);
     //      =======             //
 
     //          converting to BoardPosition coordination    //
@@ -360,30 +423,36 @@ void GameWindow::MoveBead()
 
 
     //          debugging      //
-    BoardPosition * se = this->ChessGame->FindPosition(s2);
-    this->FirstMoveLevel(se);
-    BoardPosition b;
-    b.setRow(6);
-    b.setColumn('C');
-    BoardPosition * selected = this->ChessGame->FindPosition(b);
-    this->SecondMoveLevel(selected);
+//    BoardPosition * se = this->ChessGame->FindPosition(s2);
+//    this->FirstMoveLevel(se);
+//    BoardPosition b;
+//    b.setRow(6);
+//    b.setColumn('C');
+//    BoardPosition * selected = this->ChessGame->FindPosition(b);
+//    this->SecondMoveLevel(selected);
 
-    BoardPosition deb;
-    deb.setRow(2);
-    deb.setColumn('B');
+//    BoardPosition deb;
+//    deb.setRow(2);
+//    deb.setColumn('B');
 
-    this->FirstMoveLevel(ChessGame->FindPosition(deb));
-    BoardPosition d2;
-    d2.setRow(4);
-    d2.setColumn('B');
-    this->SecondMoveLevel(ChessGame->FindPosition(d2));
+//    this->FirstMoveLevel(ChessGame->FindPosition(deb));
+//    BoardPosition d2;
+//    d2.setRow(4);
+//    d2.setColumn('B');
+//    this->SecondMoveLevel(ChessGame->FindPosition(d2));
 
-    this->FirstMoveLevel(ChessGame->FindPosition(b));
-    this->SecondMoveLevel(ChessGame->FindPosition(deb));
+//    this->FirstMoveLevel(ChessGame->FindPosition(b));
+//    this->SecondMoveLevel(ChessGame->FindPosition(deb));
 
     //          =============       //
 
-//    BoardPosition * selected = this->ChessGame->FindPosition(s2);
+    BoardPosition * selected = this->ChessGame->FindPosition(s2);
+
+    //          survey for existing in checkdir     //
+//    if(ChessGame->getIsChecked() && ChessGame->CheckDirIsEmpty())
+//    {
+
+//    }
 
     if(!selected->IsFull() && ChessGame->NextMovesIsEmpty())
     {
@@ -422,11 +491,13 @@ void GameWindow::ModifyTurn()
     if(ChessGame->getTurn() == BLACK_P)
     {
         this->TurnLabel->setText("Turn : Black");
-        this->TurnLabel->setStyleSheet("color: red;background-color: white;");
+//        this->TurnLabel->setStyleSheet("color: red;background-color: white;");
+        this->TurnLabel->setStyleSheet("color: blue;background-color: white;font-family: MV Boli;border-radius: 10px;border-width: 3px;border-color: red;font-size: 32px;border-style: solid;");
     }
     else
     {
         this->TurnLabel->setText("Turn : White");
-        this->TurnLabel->setStyleSheet("color: red;background-color: white;");
+//        this->TurnLabel->setStyleSheet("color: red;background-color: white;");
+        this->TurnLabel->setStyleSheet("color: blue;background-color: white;font-family: MV Boli;border-radius: 10px;border-width: 3px;border-color: red;font-size: 32px;border-style: solid;");
     }
 }

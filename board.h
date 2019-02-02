@@ -52,6 +52,10 @@ public:
 
     Board operator=(const Board & other);
 
+    bool SurveyForCheck(int beadId,BoardPosition kp,BoardPosition current);
+
+    bool SeeDirections(int bi,BoardPosition &kp,BoardPosition cur);
+
     //           get and set methods            //
     BoardPosition *getBlackKingPos() const;
     void setBlackKingPos(BoardPosition *value);

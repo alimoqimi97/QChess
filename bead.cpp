@@ -21,6 +21,9 @@ QList<BoardPosition> Bead::NextChoices(BoardPosition &CurPos)
 bool Bead::Check(BoardPosition &kingpos, BoardPosition &curpos)
 {}
 
+void Bead::DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current)
+{}
+
 
 void Bead::setId(const int i)
 {

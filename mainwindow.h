@@ -7,6 +7,8 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QMainWindow>
+#include <QLineEdit>
+#include <QFormLayout>
 
 class MainWindow : public QMainWindow
 {
@@ -17,7 +19,11 @@ private:
     QPushButton * Start;
     QPushButton * Quit;
     GameWindow * ChessWindow;
-
+    QLabel *WhiteName;
+    QLabel *BlackName;
+    QLineEdit *WhiteLine;
+    QLineEdit *BlackLine;
+    QFormLayout *form;
 
 public:
     MainWindow(QWidget *parent = 0);

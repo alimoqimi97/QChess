@@ -37,11 +37,11 @@ private:
 
 public:
     explicit GameWindow(QWidget *parent = 0);
+    ~GameWindow();
 
     //          get and set methods         //
     void setSquares(VOV * sq);
     VOV * getSquares();
-
 
     void CreateBoard();
     void CreateRow(QBrush first,QBrush last,int y);
@@ -51,13 +51,12 @@ public:
 
     void MovePicture(Movement & mv);
 
-    void ShowSuggestedPos(QList<BoardPosition> & sl);
+    void ShowSuggestedPos(QList<BoardPosition> & sl, Qt::GlobalColor c);
     void RestoreSuggestedPos(QList<BoardPosition> sl);
 
     void RestoreCurrentPosBrush(Movement & m);
 
     void InsertBeadPictures();
-
 
 
 signals:

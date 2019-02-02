@@ -32,12 +32,14 @@ BoardPosition Knight::MakePos(int row, int col, BoardPosition cp)
     p.setRow(cp.getRow() + row);
     p.setColumn(cp.getColumn() + col);
 
-    if(p.InRange())
-    {
-        return p;
-    }
+    return p;
 
-    return cp;
+//    if(p.InRange())
+//    {
+//        return p;
+//    }
+
+//    return cp;
 }
 
 void Knight::InsertInList(int r, int col, QList<BoardPosition> &n, BoardPosition &c)
@@ -66,13 +68,46 @@ QList<BoardPosition> Knight::NextChoices(BoardPosition &CurPos)
 
 bool Knight::Check(BoardPosition &kingpos, BoardPosition &curpos)
 {
-    int num[16] = {1,2,1,-2,-1,2,-1,-2,2,1,2,-1,-2,1,-2,-1};
-    bool control = true;
+    QPair<int,int> dir1,dir2,dif;
 
-    for(int i = 0 ; i < 17 && control;i++)
+    dir1.first = 1;
+    dir1.second = 2;
+
+    dir2.first = 2;
+    dir2.second = 1;
+
+    dif.first = abs(curpos.getRow() - kingpos.getRow());
+    dif.second = abs(curpos.getColumn() - kingpos.getColumn());
+
+    return ((dif == dir1) || (dif == dir2));
+}
+
+
+//bool Knight::Check(BoardPosition &kingpos, BoardPosition &curpos)
+//{
+//    int num[16] = {1,2,1,-2,-1,2,-1,-2,2,1,2,-1,-2,1,-2,-1};
+//    bool control = true;
+
+//    for(int i = 0 ; i < 17 && control;i++)
+//    {
+//        control = (this->MakePos(num[i],num[i + 1],curpos) != kingpos);
+//    }
+
+//    return control;
+//}
+
+void Knight::DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current)
+{
+    BoardPosition removed;
+
+    removed.setRow(nextchoice->getRow());
+    removed.setColumn(nextchoice->getColumn());
+
+    if(nextchoice->getBead()->getBeadColor() == current->getBead()->getBeadColor())
     {
-        control = (this->MakePos(num[i],num[i + 1],curpos) != kingpos);
+        N.removeOne(removed);
     }
+//    N.removeOne(removed);
 
-    return control;
+//    N.removeOne(choosed);
 }

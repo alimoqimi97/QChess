@@ -19,6 +19,12 @@ public:
 
 //    void FilterChoices(QList<BoardPosition> & n);
     virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
+
+    virtual void DeletePoses(QList<BoardPosition> &N, BoardPosition *choosed, BoardPosition *current)
+    {
+
+    }
+
 //    virtual bool Check( BoardPosition &kingpos, BoardPosition &curpos)
 //    {
 

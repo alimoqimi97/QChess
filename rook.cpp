@@ -46,6 +46,9 @@ QList<BoardPosition> Rook::NextChoices(BoardPosition &CurPos)
     AEmpty = true;
     BEmpty = true;
 
+    a = CurPos;
+    b = CurPos;
+
     for(int j = 1 ; j < 9 ; j++)
     {
         a = a.IncreaseRow(1);
@@ -73,4 +76,43 @@ bool Rook::Check(BoardPosition &kingpos, BoardPosition &curpos)
 {
     return (curpos.getColumn() == kingpos.getColumn())
             | (curpos.getRow() == kingpos.getRow());
+}
+
+void Rook::DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current)
+{
+    BoardPosition temp;
+    QPair<int,int> result;
+    int div = 1;
+
+    temp.setRow(nextchoice->getRow());
+    temp.setColumn(nextchoice->getColumn());
+
+    result.first = (nextchoice->getRow() - current->getRow());
+    result.second = nextchoice->getColumn() - current->getColumn();
+
+    if(result.first != 0)
+    {
+        div = abs(result.first);
+    }
+    else if(result.second != 0)
+    {
+        div = abs(result.second);
+    }
+
+    result.first = result.first / div;
+    result.second = result.second / div;
+
+    if(current->getBead()->getBeadColor() == nextchoice->getBead()->getBeadColor())
+    {
+        N.removeOne(temp);
+    }
+
+    temp = temp + result;
+
+    while(temp.InRange())
+    {
+        N.removeOne(temp);
+        temp = temp + result;
+    }
+
 }

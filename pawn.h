@@ -10,8 +10,6 @@ class Board;
 
 class Pawn : public Bead
 {
-    //    Q_OBJECT
-
 private:
 
 public:
@@ -22,9 +20,9 @@ public:
     bool ControlBead(Board & cboard,BoardPosition & bp);
 
     virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
-    virtual bool Check( BoardPosition &kingpos, BoardPosition &curpos);
-    //signals:
-    //public slots:
+    virtual bool Check(BoardPosition &kingpos, BoardPosition &curpos);
+
+    virtual void DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current);
 };
 
 

@@ -22,6 +22,7 @@ public:
 
     virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
     virtual bool Check(BoardPosition &kingpos,BoardPosition &curpos);
+    virtual void DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current);
 
 //signals:
 

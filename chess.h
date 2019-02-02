@@ -19,6 +19,8 @@ private:
     QString WhitePlayerName,BlackPlayerName;
     QList<Movement> BlackPlayerLastMoves,WhitePlayerLastMoves;
     QList<BoardPosition> NextMoves;
+    bool ischecked;
+    QList<BoardPosition> checkDir;
 
 public:
     explicit Chess(QObject *parent = 0);
@@ -26,9 +28,14 @@ public:
 
     //          get and set methods         //
 
-
     Board getChessBoard() const;
     void setChessBoard(const Board &value);
+
+    void setCheckDir(QList<BoardPosition> &l);
+    QList<BoardPosition> getCheckDir();
+
+    void setIsChecked(bool ic);
+    bool getIsChecked();
 
     QList<BoardPosition> getNextMoves() const;
     void setNextMoves(const QList<BoardPosition> &value);
@@ -62,7 +69,7 @@ public:
 
     QList<BoardPosition> nextChoices(BoardPosition  & currpos);
 
-    void Move(Movement & m);
+    bool Move(Movement & m);
 
     void AddToLastMoves(Movement & m);
 
@@ -70,14 +77,23 @@ public:
 
     Movement &LastMove();
 
-    void CleanExtraPos(QList<BoardPosition> & n,bool isfull,BoardPosition B);
+    void CleanExtraPos(QList<BoardPosition> & n, BoardPosition *s, BoardPosition willremove);
 
-    QList<BoardPosition> FilterChoices(QList<BoardPosition> np);
+    QList<BoardPosition> FilterChoices(QList<BoardPosition> np, BoardPosition *F);
+
+    void EditChoices(QList<BoardPosition> &n,BoardPosition *curp);
+    bool ExamineCheck(int Id,BoardPosition kingpos,BoardPosition current);
+
+    bool IsInCheckDir(BoardPosition &trg);
+    bool CheckDirIsEmpty();
+    void ClearCheckDir();
+    void AddToCheckDir(BoardPosition &trg);
+    void MakeCheckDir(BoardPosition kp,BoardPosition &dist);
 
 signals:
 
     void GameOver();
-    void KingIsChecked();
+//    void KingIsChecked(int id,BoardPosition kp,BoardPosition current);
     void TurnChanged();
 
 public slots:

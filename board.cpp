@@ -25,7 +25,6 @@ void Board::InitializeBoard()
             this->CBoard[i][j].setColumn(j + 65);
         }
     }
-
 }
 
 bool Board::PositionIsEmpty(BoardPosition &selectedpos)
@@ -43,6 +42,7 @@ void Board::Transfer(BoardPosition *F, BoardPosition *L)
     if(L->IsFull())
     {
         L->DeleteBead();
+        L->setFull(false);
     }
 
     L->setBead(F->getBead());
@@ -53,7 +53,7 @@ void Board::Transfer(BoardPosition *F, BoardPosition *L)
 
 void Board::CreatePawns()
 {
-    for(int i = 0 ; i < 9 ; i++)
+    for(int i = 0 ; i < 8 ; i++)
     {
         this->CBoard[1][i].setBead(new Pawn(2));
         this->CBoard[1][i].setFull(true);
@@ -67,13 +67,13 @@ void Board::CreateRooks()
     CBoard[0][0].setBead(new Rook(2));
     CBoard[0][0].setFull(true);
 
-    CBoard[0][7].setBead(new Rook(1));
+    CBoard[0][7].setBead(new Rook(2));
     CBoard[0][7].setFull(true);
 
     CBoard[7][0].setBead(new Rook(1));
     CBoard[7][0].setFull(true);
 
-    CBoard[7][7].setBead(new Rook(2));
+    CBoard[7][7].setBead(new Rook(1));
     CBoard[7][7].setFull(true);
 }
 
@@ -178,6 +178,54 @@ Board Board::operator=(const Board &other)
     this->WhiteKingPos = other.getWhiteKingPos();
 
     return *this;
+}
+
+bool Board::SurveyForCheck(int beadId, BoardPosition kp, BoardPosition current)
+{
+    bool result = true;
+
+    result = this->SeeDirections(beadId,kp,current);
+
+    return result;
+}
+
+bool Board::SeeDirections(int bi, BoardPosition &kp, BoardPosition cur)
+{
+    QPair<int,int> direct;
+    BoardPosition *p;
+    bool res = true;
+    BoardPosition temp = cur;
+    int div1 = 1,div2 = 1;
+
+    div1 = cur.getRow() - kp.getRow();
+    div2 = cur.getColumn() - kp.getColumn();
+
+    if(div1 != 0)
+    {
+        div1 /= abs(div1);
+        div2 /= abs(div2);
+    }
+    else if(div2 != 0)
+    {
+        div1 /= abs(div2);
+        div2 /= abs(div2);
+    }
+
+
+    direct.first = div1;
+    direct.second = div2;
+
+    p = this->FindPos(kp);
+
+    while(*p != cur && res)
+    {
+        temp = temp + direct;
+        p = this->FindPos(temp);
+
+        res &= !p->IsFull();
+    }
+
+    return !res;
 }
 
 BoardPosition *Board::getBlackKingPos() const

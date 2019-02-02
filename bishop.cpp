@@ -36,9 +36,13 @@ bool Bishop::ExaminePath(int row, int col, BoardPosition kp, BoardPosition cp)
 QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos)
 {
     QList<BoardPosition> np;
-    BoardPosition a,b,scale(CurPos);
+    BoardPosition a,b,scale;
     bool control;
 //    bool  AEmpty = true,BEmpty = true;
+
+    scale.setRow(CurPos.getRow());
+    scale.setColumn(CurPos.getColumn());
+    scale.setBead(CurPos.getBead());
 
     for(int i = 1 ; i < 9 ; i++)
     {
@@ -53,8 +57,6 @@ QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos)
             np.push_back(a);
         }
 
-//        AEmpty = !cboard.FindPos(a)->IsFull();
-
         control = b.InRange() ;
 
         if(control)
@@ -62,16 +64,75 @@ QList<BoardPosition> Bishop::NextChoices(BoardPosition &CurPos)
             np.push_back(b);
         }
 
-//        BEmpty = !cboard.FindPos(b)->IsFull();
+    }
+
+//    scale = CurPos;
+    scale.setRow(CurPos.getRow());
+    scale.setColumn(CurPos.getColumn());
+    scale.setBead(CurPos.getBead());
+
+    for(int j = 1 ; j < 9 ; j++)
+    {
+        scale = scale.DecreaseCol(1);
+        a = scale.IncreaseRow(j);
+        b = scale.DecreaseRow(j);
+
+        control = a.InRange();
+
+        if(control)
+        {
+            np.push_back(a);
+        }
+
+        control = b.InRange();
+
+        if(control)
+        {
+            np.push_back(b);
+        }
     }
 
     return np;
-
-
 }
 
 bool Bishop::Check(BoardPosition &kingpos, BoardPosition &curpos)
 {
-    return (this->ExaminePath(1,1,kingpos,curpos) | ExaminePath(1,-1,kingpos,curpos)
-            | ExaminePath(-1,1,kingpos,curpos) | ExaminePath(-1,-1,kingpos,curpos));
+    QPair<int,int> dif;
+
+    dif.first = curpos.getRow() - kingpos.getRow();
+    dif.second = curpos.getColumn() - kingpos.getColumn();
+
+    return (abs(dif.first) == abs(dif.second));
+}
+
+//bool Bishop::Check(BoardPosition &kingpos, BoardPosition &curpos)
+//{
+//    return (this->ExaminePath(1,1,kingpos,curpos) | ExaminePath(1,-1,kingpos,curpos)
+//            | ExaminePath(-1,1,kingpos,curpos) | ExaminePath(-1,-1,kingpos,curpos));
+//}
+
+void Bishop::DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current)
+{
+    QPair<int,int> result;
+    BoardPosition temp;
+
+    temp.setRow(nextchoice->getRow());
+    temp.setColumn(nextchoice->getColumn());
+
+    result.first = (nextchoice->getRow() - current->getRow()) / abs(nextchoice->getRow() - current->getRow());
+    result.second = (nextchoice->getColumn() - current->getColumn()) / abs(nextchoice->getColumn() - current->getColumn());
+
+    if(nextchoice->getBead()->getBeadColor() == current->getBead()->getBeadColor())
+    {
+        N.removeOne(temp);
+    }
+
+    temp = temp + result;
+
+    while(temp.InRange())
+    {
+        N.removeOne(temp);
+        temp = temp + result;
+    }
+
 }

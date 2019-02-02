@@ -31,3 +31,18 @@ bool Queen::Check(BoardPosition &kingpos, BoardPosition &curpos)
 
     return (r.Check(kingpos,curpos) | b.Check(kingpos,curpos));
 }
+
+void Queen::DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current)
+{
+    Bishop b;
+    Rook r;
+
+    if((nextchoice->getRow() ==  current->getRow()) || (nextchoice->getColumn() == current->getColumn()))
+    {
+        r.DeletePoses(N,nextchoice,current);
+    }
+    else
+    {
+        b.DeletePoses(N,nextchoice,current);
+    }
+}

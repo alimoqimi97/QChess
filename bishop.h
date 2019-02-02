@@ -4,6 +4,7 @@
 #include "bead.h"
 #include "boardposition.h"
 #include <QPair>
+#include "math.h"
 
 //#include "board.h"
 //#include <QObject>
@@ -22,6 +23,9 @@ public:
 
     virtual QList<BoardPosition> NextChoices(BoardPosition &CurPos);
     virtual bool Check( BoardPosition &kingpos,  BoardPosition &curpos);
+
+
+    virtual void DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current);
 
 //signals:
 

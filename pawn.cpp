@@ -40,15 +40,19 @@ QList<BoardPosition> Pawn::NextChoices(BoardPosition &CurPos)
         b = CurPos.DecreaseRow(1);
         c = CurPos.DecreaseRow(2);
     }
-        np.push_back(b);
+    np.push_back(b);
+
+    if(CurPos.getRow() == 2 || CurPos.getRow() == 7)
+    {
         np.push_back(c);
+    }
 
     return np;
 }
 
 bool Pawn::Check(BoardPosition &kingpos, BoardPosition &curpos)
 {
-    BoardPosition a,b;
+    BoardPosition a(curpos),b(curpos);
 
     if(this->getBeadColor() == BLACK)
     {
@@ -62,4 +66,16 @@ bool Pawn::Check(BoardPosition &kingpos, BoardPosition &curpos)
     }
 
     return (a == kingpos) | (b == kingpos);
+}
+
+void Pawn::DeletePoses(QList<BoardPosition> &N, BoardPosition *nextchoice, BoardPosition *current)
+{
+    BoardPosition removed;
+
+    removed.setRow(nextchoice->getRow());
+    removed.setColumn(nextchoice->getColumn());
+
+    N.removeOne(removed);
+
+//    N.removeOne(choosed);
 }
